@@ -11,6 +11,7 @@ import main.java.com.ubo.tp.message.core.directory.WatchableDirectory;
 import main.java.com.ubo.tp.message.datamodel.Message;
 import main.java.com.ubo.tp.message.datamodel.User;
 import main.java.com.ubo.tp.message.ihm.loginComponent.SigninControlleur;
+import main.java.com.ubo.tp.message.ihm.loginComponent.SigninVue;
 import main.java.com.ubo.tp.message.ihm.session.ISession;
 import main.java.com.ubo.tp.message.ihm.session.ISessionObserver;
 import main.java.com.ubo.tp.message.ihm.signupComponent.SignupControlleur;
@@ -96,7 +97,7 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 	//	this.loginControlleur.init();
 	//	this.signupControlleur.setSession(this);
 	//	this.signinControlleur.setSession(this);
-		this.signupControlleur.init();
+		//this.signupControlleur.init();
 	//	this.signinControlleur.init();
 	}
 
@@ -187,6 +188,14 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 
 	@Override
 	public void notifyUserAdded(User addedUser) {
+		if(mMainView == null) {
+			this.initGui();
+		}
+
+		SigninVue signinVue = new SigninVue();
+		signinVue.setSiggninObserver(signinControlleur);
+		signinVue.initGUI();
+		mMainView.changeCotent(signinVue.getContentPane());
 		System.out.println("User added");
 	}
 

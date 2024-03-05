@@ -1,16 +1,12 @@
 package main.java.com.ubo.tp.message.ihm.loginComponent;
 
 import main.java.com.ubo.tp.message.core.database.IDatabaseObserver;
-import main.java.com.ubo.tp.message.ihm.session.ISessionObserver;
-import main.java.com.ubo.tp.message.ihm.signupComponent.ISignupObserver;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class SigninVue {
 
@@ -54,10 +50,10 @@ public class SigninVue {
     public void initGUI() {
             // Configuration initiale du cadre et du panneau
             frame = new JFrame("Authentification");
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            /*frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setSize(1014, 597); // Taille initiale
             frame.setLocationRelativeTo(null); // Centrer
-            frame.setResizable(false);
+            frame.setResizable(false);*/
 
             contentPane = new JPanel(null) {
                 @Override
@@ -138,5 +134,9 @@ public class SigninVue {
                 SigninVue.this.frame.setVisible(true);
             }
         });
+    }
+
+    public JPanel getContentPane() {
+        return contentPane;
     }
 }

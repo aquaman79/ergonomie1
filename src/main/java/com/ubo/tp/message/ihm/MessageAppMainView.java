@@ -5,6 +5,8 @@ import main.java.com.ubo.tp.message.core.EntityManager;
 import main.java.com.ubo.tp.message.core.database.IDatabase;
 import main.java.com.ubo.tp.message.datamodel.Message;
 import main.java.com.ubo.tp.message.datamodel.User;
+import main.java.com.ubo.tp.message.ihm.loginComponent.SigninControlleur;
+import main.java.com.ubo.tp.message.ihm.loginComponent.SigninVue;
 import main.java.com.ubo.tp.message.ihm.signupComponent.SignupControlleur;
 import main.java.com.ubo.tp.message.ihm.signupComponent.SignupView;
 
@@ -54,7 +56,9 @@ public class MessageAppMainView {
         SignupView signupView = new SignupView();
         signupView.setSignupObserver(signupControlleur);
         signupView.initGUI();
-        mFrame.add(signupView.getContentPane());
+        JPanel component = signupView.getContentPane();
+        component.setName("Insc**");
+        mFrame.add(component);
     }
 
     /**
@@ -349,6 +353,14 @@ public class MessageAppMainView {
                 GridBagConstraints.BOTH, new Insets(5, 5, 5, 5), 0, 0));
         this.contentPaneHome.add(sendMessageButton, new GridBagConstraints(1, 3, 1, 1, 1, 1, GridBagConstraints.EAST,
                 GridBagConstraints.BOTH, new Insets(5, 5, 5, 5), 0, 0));
+    }
+
+    public void changeCotent(JPanel panel)
+    {
+        mFrame.getContentPane().removeAll();
+        mFrame.getContentPane().add(panel);
+        mFrame.revalidate();
+
     }
 }
 
