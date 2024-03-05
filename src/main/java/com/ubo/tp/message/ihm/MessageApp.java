@@ -12,6 +12,8 @@ import main.java.com.ubo.tp.message.datamodel.Message;
 import main.java.com.ubo.tp.message.datamodel.User;
 import main.java.com.ubo.tp.message.ihm.loginComponent.SigninControlleur;
 import main.java.com.ubo.tp.message.ihm.loginComponent.SigninVue;
+import main.java.com.ubo.tp.message.ihm.messageComponent.MessageControleur;
+import main.java.com.ubo.tp.message.ihm.messageComponent.MessageView;
 import main.java.com.ubo.tp.message.ihm.session.ISession;
 import main.java.com.ubo.tp.message.ihm.session.ISessionObserver;
 import main.java.com.ubo.tp.message.ihm.session.Session;
@@ -130,7 +132,11 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 
 		SignupView signupView = new SignupView(signupControlleur);
 		signupView.initGUI();
-		mMainView.changeCotent(signupView.getContentPane());
+
+		MessageView messageView = new MessageView(new MessageControleur());
+		messageView.initGUI("Utilisateur1", "Ceci est un message de chat qui peut être plus long et occuper plusieurs lignes dans la vue.", "12:34");
+
+		mMainView.changeCotent(messageView.getContentPane());
 	}
 
 	/**
