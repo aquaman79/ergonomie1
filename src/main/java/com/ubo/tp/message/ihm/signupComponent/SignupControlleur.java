@@ -62,7 +62,6 @@ public class SignupControlleur implements IDatabaseObserver, ISignupObserver  {
     }
 
     protected void initGui() {
-        loginView = new SignupView();
         //mMainView = new MessageAppMainView();
         loginView.setSignupObserver(this);
         loginView.initGUI();

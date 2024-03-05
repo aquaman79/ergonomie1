@@ -48,19 +48,6 @@ public class MessageAppMainView {
         this.mEntityManager = entityManager;
     }
 
-    protected void initGUISignup(SignupControlleur signupControlleur) {
-        if(mFrame == null) {
-            this.initGUI();
-        }
-
-        SignupView signupView = new SignupView();
-        signupView.setSignupObserver(signupControlleur);
-        signupView.initGUI();
-        JPanel component = signupView.getContentPane();
-        component.setName("Insc**");
-        mFrame.add(component);
-    }
-
     /**
      * Initialisation de l'IHM
      */
@@ -360,7 +347,6 @@ public class MessageAppMainView {
         mFrame.getContentPane().removeAll();
         mFrame.getContentPane().add(panel);
         mFrame.revalidate();
-
     }
 }
 
