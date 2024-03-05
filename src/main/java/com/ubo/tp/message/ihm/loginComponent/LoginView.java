@@ -91,7 +91,6 @@ public class LoginView  {
 
         this.frame.pack();
         this.frame.setLocationRelativeTo(null); // Centrer la fenêtre
-        this.frame.setVisible(true);
     }
 
 

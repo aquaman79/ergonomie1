@@ -8,7 +8,7 @@ import main.java.com.ubo.tp.message.datamodel.User;
 
 import javax.swing.*;
 
-public class LoginControlleur implements IDatabaseObserver {
+public class SignupControlleur implements IDatabaseObserver {
     private User user ;
 
     /**
@@ -21,10 +21,10 @@ public class LoginControlleur implements IDatabaseObserver {
      */
     protected EntityManager mEntityManager;
 
-    private LoginView loginView ;
+    private SignupView loginView ;
 
 
-    public LoginControlleur(IDatabase database, EntityManager entityManager) {
+    public SignupControlleur(IDatabase database, EntityManager entityManager) {
         this.mDatabase = database;
         this.mEntityManager = entityManager;
     }
@@ -49,7 +49,7 @@ public class LoginControlleur implements IDatabaseObserver {
     }
 
     protected void initGui() {
-        loginView = new LoginView();
+        loginView = new SignupView();
         //mMainView = new MessageAppMainView();
         loginView.initGUI();
     }

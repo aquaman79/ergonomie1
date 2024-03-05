@@ -8,7 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class LoginView  {
+public class SignupView {
 
     private JFrame frame;
     private JTextField textField;
@@ -22,7 +22,7 @@ public class LoginView  {
     /**
      * Launch the application.
      */
-    public LoginView() {
+    public SignupView() {
     }
 
     /**
@@ -115,13 +115,13 @@ public class LoginView  {
             @Override
             public void run() {
                 // Custom de l'affichage
-                JFrame frame = LoginView.this.frame;
+                JFrame frame = SignupView.this.frame;
                 Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
                 frame.setLocation((screenSize.width - frame.getWidth()) / 6,
                         (screenSize.height - frame.getHeight()) / 4);
 
                 // Affichage
-                LoginView.this.frame.setVisible(true);
+                SignupView.this.frame.setVisible(true);
             }
         });
     }
