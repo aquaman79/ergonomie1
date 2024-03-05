@@ -20,11 +20,8 @@ public class MessageMainView {
 
     MessageObserver messageObserver;
 
-    MessageControleur messageControleur;
-
-    public MessageMainView(MessageObserver messageObserver, MessageControleur messageControleur, User user, Message message) {
+    public MessageMainView(MessageObserver messageObserver, User user, Message message) {
         this.messageObserver = messageObserver;
-        this.messageControleur = messageControleur;
         this.user = user;
         this.message = message;
     }
@@ -49,7 +46,7 @@ public class MessageMainView {
     }
 
     public void addMessage(Message message) {
-        MessageView messageView = new MessageView(messageControleur);
+        MessageView messageView = new MessageView();
         messageView.initGUI(user.getName(), message.getText(), LocalTime.now().toString());
 
         vBoxMessages.add(messageView.getContentPane());

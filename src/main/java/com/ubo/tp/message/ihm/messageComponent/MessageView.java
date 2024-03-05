@@ -11,10 +11,7 @@ public class MessageView {
     private JLabel messageLabel;
     private JLabel timeLabel;
 
-    private MessageControleur messageControleur;
-
-    public MessageView(MessageControleur messageControleur) {
-        this.messageControleur = messageControleur;
+    public MessageView() {
     }
 
     public void initGUI(String sender, String message, String time) {

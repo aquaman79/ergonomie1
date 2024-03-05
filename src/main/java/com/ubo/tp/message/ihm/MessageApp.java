@@ -246,7 +246,7 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 			this.initGui();
 		}
 		this.user = connectedUser;
-		messageMainView = new MessageMainView(messageControleur, messageControleur, this.user, this.message);
+		messageMainView = new MessageMainView(messageControleur, this.user, this.message);
 		messageMainView.initGUI();
 		mMainView.changeCotent(messageMainView.getContentPane());
 	}
