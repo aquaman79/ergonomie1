@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.example.org/user/"
+	targetNamespace="http://www.example.org/user/">
+    <complexType name="UserXml">
+    	<sequence>
+    		<element name="ID" type="string"></element>
+    		<element name="UserTag" type="string"></element>
+    		<element name="UserPassword" type="string"></element>
+    		<element name="Name" type="string"></element>
+    		<element name="AvatarPath" type="string"></element>
+    		<sequence>
+    			<element name="follows" type="string" maxOccurs="unbounded" minOccurs="0"></element>
+    		</sequence>
+    	</sequence>
+    </complexType>
+
+
+    <element name="User" type="tns:UserXml"></element>
+</schema>
