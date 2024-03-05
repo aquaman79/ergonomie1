@@ -6,6 +6,8 @@ import main.java.com.ubo.tp.message.datamodel.User;
 import javax.swing.*;
 import java.awt.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class MessageMainView {
     private Message message;
@@ -36,9 +38,6 @@ public class MessageMainView {
         vBox = Box.createVerticalBox();
         vBoxMessages = Box.createVerticalBox();
 
-        MessageView messageView = new MessageView(messageControleur);
-        String msgText = this.message== null ? "" : this.message.getText();
-        messageView.initGUI(user.getName(), msgText, LocalDate.now().toString());
         MessageInputView messageInputView= new MessageInputView(messageObserver);
         messageInputView.initGUI();
         vBox.add(vBoxMessages);
@@ -51,7 +50,7 @@ public class MessageMainView {
 
     public void addMessage(Message message) {
         MessageView messageView = new MessageView(messageControleur);
-        messageView.initGUI(user.getName(), message.getText(), LocalDate.now().toString());
+        messageView.initGUI(user.getName(), message.getText(), LocalTime.now().toString());
 
         vBoxMessages.add(messageView.getContentPane());
     }
