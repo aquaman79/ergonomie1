@@ -15,6 +15,7 @@ import main.java.com.ubo.tp.message.ihm.loginComponent.SigninControlleur;
 import main.java.com.ubo.tp.message.ihm.loginComponent.SigninVue;
 import main.java.com.ubo.tp.message.ihm.messageComponent.MessageControleur;
 import main.java.com.ubo.tp.message.ihm.messageComponent.MessageInputView;
+import main.java.com.ubo.tp.message.ihm.messageComponent.MessageMainView;
 import main.java.com.ubo.tp.message.ihm.messageComponent.MessageView;
 import main.java.com.ubo.tp.message.ihm.session.ISession;
 import main.java.com.ubo.tp.message.ihm.session.ISessionObserver;
@@ -42,6 +43,8 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 
 	private MessageControleur messageControleur ;
 
+
+
 	/**
 	 * Gestionnaire des entités contenu de la base de données.
 	 */
@@ -64,12 +67,15 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 	 */
 	protected String mExchangeDirectoryPath;
 
+	protected MessageMainView messageMainView;
+
 	/**
 	 * Nom de la classe de l'UI.
 	 */
 	protected String mUiClassName;
 
 	private ISession session ;
+	private Message message;
 
 	public SigninControlleur getLoginControlleur() {
 		return signinControlleur;
@@ -139,13 +145,7 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 
 		SignupView signupView = new SignupView(signupControlleur);
 		signupView.initGUI();
-
-		MessageView messageView = new MessageView(new MessageControleur(this.mDatabase, this.mEntityManager,this.user));
-		//messageView.initGUI(this.user.getName(), "Ceci est un message de chat qui peut être plus long et occuper plusieurs lignes dans la vue.", LocalDate.now().toString());
-		MessageInputView messageInputView = new MessageInputView(messageControleur);
-		messageInputView.initGUI();
-		mMainView.changeCotent(messageInputView.getContentPane());
-		//mMainView.changeCotent(messageView.getContentPane());
+		mMainView.changeCotent(signupView.getContentPane());
 	}
 
 	/**
@@ -196,6 +196,7 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 	@Override
 	public void notifyMessageAdded(Message addedMessage) {
 		System.out.println("voici mon message"+addedMessage.getText());
+		this.message = addedMessage;
 	}
 
 	@Override
@@ -238,6 +239,12 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 	@Override
 	public void notifyLogin(User connectedUser) {
 		System.out.println("login done");
+		if(mMainView == null) {
+			this.initGui();
+		}
+		MessageMainView messageMainView = new MessageMainView(messageControleur, messageControleur, this.user, this.message);
+		messageMainView.initGUI();
+		mMainView.changeCotent(messageMainView.getContentPane());
 	}
 
 	@Override
