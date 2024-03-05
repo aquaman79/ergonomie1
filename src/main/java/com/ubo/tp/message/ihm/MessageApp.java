@@ -195,8 +195,13 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 //database interfce
 	@Override
 	public void notifyMessageAdded(Message addedMessage) {
-		System.out.println("voici mon message"+addedMessage.getText());
+		if(mMainView == null) {
+			this.initGui();
+		}
 		this.message = addedMessage;
+		messageMainView = new MessageMainView(messageControleur, messageControleur, this.user, this.message);
+		messageMainView.initGUI();
+		mMainView.changeCotent(messageMainView.getContentPane());
 	}
 
 	@Override
@@ -206,7 +211,7 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 
 	@Override
 	public void notifyMessageModified(Message modifiedMessage) {
-		System.out.println("Message modified");
+
 	}
 
 	@Override
@@ -238,11 +243,11 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 //IssessionObserver
 	@Override
 	public void notifyLogin(User connectedUser) {
-		System.out.println("login done");
 		if(mMainView == null) {
 			this.initGui();
 		}
-		MessageMainView messageMainView = new MessageMainView(messageControleur, messageControleur, this.user, this.message);
+		this.user = connectedUser;
+		messageMainView = new MessageMainView(messageControleur, messageControleur, this.user, this.message);
 		messageMainView.initGUI();
 		mMainView.changeCotent(messageMainView.getContentPane());
 	}

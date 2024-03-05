@@ -348,6 +348,7 @@ public class MessageAppMainView {
         mFrame.getContentPane().removeAll();
         mFrame.getContentPane().add(panel);
         mFrame.revalidate();
+        mFrame.repaint();
     }
 }
 
