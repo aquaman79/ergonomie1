@@ -14,6 +14,8 @@ public class MessageMainView {
 
     private Box vBox;
 
+    private Box vBoxMessages;
+
     MessageObserver messageObserver;
 
     MessageControleur messageControleur;
@@ -32,17 +34,25 @@ public class MessageMainView {
     public void initGUI() {
         contentPane = new JPanel(new BorderLayout());
         vBox = Box.createVerticalBox();
+        vBoxMessages = Box.createVerticalBox();
 
         MessageView messageView = new MessageView(messageControleur);
         String msgText = this.message== null ? "" : this.message.getText();
         messageView.initGUI(user.getName(), msgText, LocalDate.now().toString());
         MessageInputView messageInputView= new MessageInputView(messageObserver);
         messageInputView.initGUI();
-        vBox.add(messageView.getContentPane());
+        vBox.add(vBoxMessages);
         vBox.add(messageInputView.getContentPane());
 
         contentPane.add(vBox);
 
         contentPane.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+    }
+
+    public void addMessage(Message message) {
+        MessageView messageView = new MessageView(messageControleur);
+        messageView.initGUI(user.getName(), message.getText(), LocalDate.now().toString());
+
+        vBoxMessages.add(messageView.getContentPane());
     }
 }
