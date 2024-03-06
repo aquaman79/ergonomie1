@@ -101,6 +101,13 @@ public class SignupView {
         btnSignup.setBounds((width - textFieldWidth) / 2, (int) (height / 4 + 120), textFieldWidth, 50);
         contentPane.add(btnSignup);
 
+
+
+        JButton btnSignin = new JButton("Se connecter");
+        btnSignin.setFont(new Font("Tahoma", Font.PLAIN, 26));
+        btnSignin.setBounds((width - textFieldWidth) / 2, (int) (height / 4 + 180), textFieldWidth, 50); // Notez le changement de 120 à 180 dans la coordonnée y
+        contentPane.add(btnSignin);
+
         // Ajouter les écouteurs d'événements
         btnChooseAvatar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -116,7 +123,7 @@ public class SignupView {
             }
         });
 
-        btnSignup.addActionListener(new ActionListener() {
+        btnSignin.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Implémentation de la logique d'inscription
                 String userName = textField.getText();
@@ -126,6 +133,14 @@ public class SignupView {
                 }
             }
         });
+
+        btnSignin.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Implémentation de la logique d'inscription
+                System.out.println("boutton se connecter");
+            }
+        });
+
 
         //frame.setVisible(true);
     }
