@@ -38,10 +38,8 @@ public class SigninVue {
         this.siggninObserver = siggninObserver;
     }
 
-    /**
-     * Launch the application.
-     */
-    public SigninVue() {
+    public SigninVue(ISigninObserver siggninObserver) {
+        this.siggninObserver = siggninObserver;
     }
 
     /**

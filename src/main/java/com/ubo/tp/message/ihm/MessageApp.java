@@ -16,6 +16,7 @@ import main.java.com.ubo.tp.message.ihm.session.ISession;
 import main.java.com.ubo.tp.message.ihm.session.ISessionObserver;
 import main.java.com.ubo.tp.message.ihm.session.Session;
 import main.java.com.ubo.tp.message.ihm.signupComponent.SignupControlleur;
+import main.java.com.ubo.tp.message.ihm.signupComponent.SignupView;
 
 import javax.swing.*;
 
@@ -124,9 +125,12 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 	 */
 	protected void initGui() {
 		mMainView = new MessageAppMainView(mDatabase, mEntityManager);
-		//mMainView = new MessageAppMainView();
-		//mMainView.initGUI();
-		mMainView.initGUISignup(signupControlleur);
+		mMainView.initGUI();
+		//mMainView.initGUISignup(signupControlleur);
+
+		SignupView signupView = new SignupView(signupControlleur);
+		signupView.initGUI();
+		mMainView.changeCotent(signupView.getContentPane());
 	}
 
 	/**
@@ -195,8 +199,7 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 			this.initGui();
 		}
 
-		SigninVue signinVue = new SigninVue();
-		signinVue.setSiggninObserver(signinControlleur);
+		SigninVue signinVue = new SigninVue(signinControlleur);
 		signinVue.initGUI();
 		mMainView.changeCotent(signinVue.getContentPane());
 		System.out.println("User added");

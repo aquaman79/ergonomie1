@@ -55,29 +55,6 @@ public class SigninControlleur implements IDatabaseObserver, ISigninObserver {
             e.printStackTrace();
         }
     }
-    public void init() {
-        // Init du look and feel de l'application
-        this.initLookAndFeel();
-
-        // Initialisation de l'IHM
-        this.initGui();
-    }
-
-    protected void initGui() {
-        loginView = new SigninVue();
-        //mMainView = new MessageAppMainView();
-        loginView.setDatabaseObserver(this);
-        loginView.setSiggninObserver(this);
-
-        loginView.initGUI();
-    }
-
-    public void show() {
-        if(loginView == null) {
-            this.initGui();
-        }
-        loginView.showGUI();
-    }
 
     @Override
     public void notifyMessageAdded(Message addedMessage) {

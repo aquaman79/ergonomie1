@@ -27,11 +27,8 @@ public class SignupView {
         this.signupObserver = observer;
     }
 
-
-    /**
-     * Launch the application.
-     */
-    public SignupView() {
+    public SignupView(ISignupObserver signupObserver) {
+        this.signupObserver = signupObserver;
     }
 
     /**
