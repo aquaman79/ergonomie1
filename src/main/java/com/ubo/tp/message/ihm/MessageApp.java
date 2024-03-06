@@ -14,6 +14,7 @@ import main.java.com.ubo.tp.message.ihm.loginComponent.SigninControlleur;
 import main.java.com.ubo.tp.message.ihm.loginComponent.SigninVue;
 import main.java.com.ubo.tp.message.ihm.session.ISession;
 import main.java.com.ubo.tp.message.ihm.session.ISessionObserver;
+import main.java.com.ubo.tp.message.ihm.session.Session;
 import main.java.com.ubo.tp.message.ihm.signupComponent.SignupControlleur;
 
 import javax.swing.*;
@@ -59,6 +60,7 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 	 */
 	protected String mUiClassName;
 
+	private ISession session ;
 
 	public SigninControlleur getLoginControlleur() {
 		return signinControlleur;
@@ -77,9 +79,10 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 	public MessageApp(IDatabase database, EntityManager entityManager) {
 		this.mDatabase = database;
 		this.mEntityManager = entityManager;
-		signinControlleur = new SigninControlleur(database,entityManager);
 		signupControlleur = new SignupControlleur(database,entityManager);
-
+		this.session = new Session();
+		this.session.addObserver(this);
+		signinControlleur = new SigninControlleur(database,entityManager,this.session);
 	}
 
 	/**

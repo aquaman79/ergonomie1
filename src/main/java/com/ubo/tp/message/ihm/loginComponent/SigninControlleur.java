@@ -38,9 +38,10 @@ public class SigninControlleur implements IDatabaseObserver, ISigninObserver {
         this.msession = msession;
     }
 
-    public SigninControlleur(IDatabase database, EntityManager entityManager) {
+    public SigninControlleur(IDatabase database, EntityManager entityManager,ISession session) {
         this.mDatabase = database;
         this.mEntityManager = entityManager;
+        this.msession = session;
     }
 
     protected void initLookAndFeel() {

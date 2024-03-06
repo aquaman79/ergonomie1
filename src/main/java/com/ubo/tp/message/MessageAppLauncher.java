@@ -28,7 +28,7 @@ public class MessageAppLauncher {
 	public static void main(String[] args) {
 
 		IDatabase database = new Database();
-		ISession iSession= new Session();
+	//	ISession iSession= new Session();
 
 		EntityManager entityManager = new EntityManager(database);
 
@@ -40,7 +40,7 @@ public class MessageAppLauncher {
 		MessageApp messageApp = new MessageApp(database, entityManager);
 
 		database.addObserver(messageApp);
-		iSession.addObserver(messageApp);
+		//iSession.addObserver(messageApp);
 
 		messageApp.init();
 

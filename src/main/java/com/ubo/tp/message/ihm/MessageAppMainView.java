@@ -46,6 +46,7 @@ public class MessageAppMainView {
     public MessageAppMainView(IDatabase database, EntityManager entityManager) {
         this.mDatabase = database;
         this.mEntityManager = entityManager;
+
     }
 
     protected void initGUISignup(SignupControlleur signupControlleur) {
