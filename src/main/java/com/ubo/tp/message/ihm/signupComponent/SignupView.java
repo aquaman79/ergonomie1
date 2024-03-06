@@ -123,7 +123,7 @@ public class SignupView {
             }
         });
 
-        btnSignin.addActionListener(new ActionListener() {
+        btnSignup.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Implémentation de la logique d'inscription
                 String userName = textField.getText();
