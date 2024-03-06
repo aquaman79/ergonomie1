@@ -4,9 +4,6 @@ import main.java.com.ubo.tp.message.core.EntityManager;
 import main.java.com.ubo.tp.message.core.database.Database;
 import main.java.com.ubo.tp.message.core.database.IDatabase;
 import main.java.com.ubo.tp.message.ihm.MessageApp;
-import main.java.com.ubo.tp.message.ihm.loginComponent.LoginControlleur;
-import main.java.com.ubo.tp.message.ihm.session.ISession;
-import main.java.com.ubo.tp.message.ihm.session.Session;
 import mock.MessageAppMock;
 
 /**

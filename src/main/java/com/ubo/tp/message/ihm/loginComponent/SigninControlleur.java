@@ -5,7 +5,6 @@ import main.java.com.ubo.tp.message.core.database.IDatabase;
 import main.java.com.ubo.tp.message.core.database.IDatabaseObserver;
 import main.java.com.ubo.tp.message.datamodel.Message;
 import main.java.com.ubo.tp.message.datamodel.User;
-import main.java.com.ubo.tp.message.ihm.MessageAppMainView;
 import main.java.com.ubo.tp.message.ihm.session.Session;
 
 import javax.swing.*;
@@ -13,7 +12,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-public class LoginControlleur implements IDatabaseObserver {
+public class SigninControlleur implements IDatabaseObserver {
     private User user ;
 
     /**
@@ -26,12 +25,12 @@ public class LoginControlleur implements IDatabaseObserver {
      */
     protected EntityManager mEntityManager;
 
-    private LoginView loginView ;
+    private SigninVue loginView ;
 
     private Session msession ;
 
 
-    public LoginControlleur(IDatabase database, EntityManager entityManager) {
+    public SigninControlleur(IDatabase database, EntityManager entityManager) {
         this.mDatabase = database;
         this.mEntityManager = entityManager;
     }
@@ -56,7 +55,7 @@ public class LoginControlleur implements IDatabaseObserver {
     }
 
     protected void initGui() {
-        loginView = new LoginView();
+        loginView = new SigninVue();
         //mMainView = new MessageAppMainView();
         loginView.setDatabaseObserver(this);
         loginView.initGUI();

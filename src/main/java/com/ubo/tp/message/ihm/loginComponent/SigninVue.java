@@ -1,7 +1,6 @@
 package main.java.com.ubo.tp.message.ihm.loginComponent;
 
 import main.java.com.ubo.tp.message.core.database.IDatabaseObserver;
-import main.java.com.ubo.tp.message.ihm.MessageAppMainView;
 import main.java.com.ubo.tp.message.ihm.session.ISessionObserver;
 
 import java.awt.*;
@@ -11,7 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-public class LoginView  {
+public class SigninVue {
 
     private JFrame frame;
     private JTextField textField;
@@ -35,7 +34,7 @@ public class LoginView  {
     /**
      * Launch the application.
      */
-    public LoginView() {
+    public SigninVue() {
     }
 
     /**
@@ -105,13 +104,13 @@ public class LoginView  {
             @Override
             public void run() {
                 // Custom de l'affichage
-                JFrame frame = LoginView.this.frame;
+                JFrame frame = SigninVue.this.frame;
                 Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
                 frame.setLocation((screenSize.width - frame.getWidth()) / 6,
                         (screenSize.height - frame.getHeight()) / 4);
 
                 // Affichage
-                LoginView.this.frame.setVisible(true);
+                SigninVue.this.frame.setVisible(true);
             }
         });
     }

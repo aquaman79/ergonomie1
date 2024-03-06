@@ -1,6 +1,5 @@
 package main.java.com.ubo.tp.message.ihm;
 
-import java.awt.*;
 import java.io.File;
 
 import main.java.com.ubo.tp.message.IMessageAppObserver;
@@ -11,7 +10,7 @@ import main.java.com.ubo.tp.message.core.directory.IWatchableDirectory;
 import main.java.com.ubo.tp.message.core.directory.WatchableDirectory;
 import main.java.com.ubo.tp.message.datamodel.Message;
 import main.java.com.ubo.tp.message.datamodel.User;
-import main.java.com.ubo.tp.message.ihm.loginComponent.LoginControlleur;
+import main.java.com.ubo.tp.message.ihm.loginComponent.SigninControlleur;
 import main.java.com.ubo.tp.message.ihm.session.ISession;
 import main.java.com.ubo.tp.message.ihm.session.ISessionObserver;
 import main.java.com.ubo.tp.message.ihm.signupComponent.SignupControlleur;
@@ -30,7 +29,7 @@ public class MessageApp implements IDatabaseObserver , IMessageAppObserver, ISes
 	protected IDatabase mDatabase;
 
 
-	private LoginControlleur loginControlleur ;
+	private SigninControlleur loginControlleur ;
 
 	private SignupControlleur signupControlleur;
 
@@ -60,11 +59,11 @@ public class MessageApp implements IDatabaseObserver , IMessageAppObserver, ISes
 	protected String mUiClassName;
 
 
-	public LoginControlleur getLoginControlleur() {
+	public SigninControlleur getLoginControlleur() {
 		return loginControlleur;
 	}
 
-	public void setLoginControlleur(LoginControlleur loginControlleur) {
+	public void setLoginControlleur(SigninControlleur loginControlleur) {
 		this.loginControlleur = loginControlleur;
 	}
 
@@ -91,7 +90,7 @@ public class MessageApp implements IDatabaseObserver , IMessageAppObserver, ISes
 	public MessageApp(IDatabase database, EntityManager entityManager) {
 		this.mDatabase = database;
 		this.mEntityManager = entityManager;
-		loginControlleur = new LoginControlleur(database,entityManager);
+		loginControlleur = new SigninControlleur(database,entityManager);
 		signupControlleur = new SignupControlleur(database,entityManager);
 
 	}
