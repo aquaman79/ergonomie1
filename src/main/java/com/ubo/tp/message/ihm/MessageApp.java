@@ -3,6 +3,7 @@ package main.java.com.ubo.tp.message.ihm;
 import java.awt.*;
 import java.io.File;
 
+import main.java.com.ubo.tp.message.IMessageAppObserver;
 import main.java.com.ubo.tp.message.core.EntityManager;
 import main.java.com.ubo.tp.message.core.database.IDatabase;
 import main.java.com.ubo.tp.message.core.database.IDatabaseObserver;
@@ -11,7 +12,9 @@ import main.java.com.ubo.tp.message.core.directory.WatchableDirectory;
 import main.java.com.ubo.tp.message.datamodel.Message;
 import main.java.com.ubo.tp.message.datamodel.User;
 import main.java.com.ubo.tp.message.ihm.loginComponent.LoginControlleur;
+import main.java.com.ubo.tp.message.ihm.session.ISession;
 import main.java.com.ubo.tp.message.ihm.session.ISessionObserver;
+import main.java.com.ubo.tp.message.ihm.signupComponent.SignupControlleur;
 
 import javax.swing.*;
 
@@ -20,7 +23,7 @@ import javax.swing.*;
  *
  * @author S.Lucas
  */
-public class MessageApp implements IDatabaseObserver , ISessionObserver {
+public class MessageApp implements IDatabaseObserver , IMessageAppObserver, ISession {
 	/**
 	 * Base de données.
 	 */
@@ -28,6 +31,8 @@ public class MessageApp implements IDatabaseObserver , ISessionObserver {
 
 
 	private LoginControlleur loginControlleur ;
+
+	private SignupControlleur signupControlleur;
 
 	/**
 	 * Gestionnaire des entités contenu de la base de données.
@@ -54,6 +59,7 @@ public class MessageApp implements IDatabaseObserver , ISessionObserver {
 	 */
 	protected String mUiClassName;
 
+
 	public LoginControlleur getLoginControlleur() {
 		return loginControlleur;
 	}
@@ -62,6 +68,20 @@ public class MessageApp implements IDatabaseObserver , ISessionObserver {
 		this.loginControlleur = loginControlleur;
 	}
 
+
+
+
+		@Override
+		public void onUserSignupCompleted(User user) {
+			System.out.println("User added: " + user.getName());
+			// Procédez ici à l'affichage de la page principale ou à d'autres actions post-inscription
+		}
+
+		@Override
+		public void onUserSignupFailed(String errorMessage) {
+			System.err.println(errorMessage);
+			// Affichez ici un message d'erreur à l'utilisateur
+		}
 	/**
 	 * Constructeur.
 	 *
@@ -72,6 +92,7 @@ public class MessageApp implements IDatabaseObserver , ISessionObserver {
 		this.mDatabase = database;
 		this.mEntityManager = entityManager;
 		loginControlleur = new LoginControlleur(database,entityManager);
+		signupControlleur = new SignupControlleur(database,entityManager);
 
 	}
 
@@ -87,7 +108,9 @@ public class MessageApp implements IDatabaseObserver , ISessionObserver {
 
 		// Initialisation de l'IHM
 		this.initGui();
-		this.loginControlleur.init();
+	//	this.loginControlleur.init();
+		this.signupControlleur.setSession(this);
+		this.signupControlleur.init();
 	}
 
 	/**
@@ -153,7 +176,9 @@ public class MessageApp implements IDatabaseObserver , ISessionObserver {
 			this.initGui();
 		}
 		//mMainView.showGUI();
-		loginControlleur.show();
+		//loginControlleur.show();
+
+		signupControlleur.show();
 	}
 
 	@Override
@@ -191,14 +216,41 @@ public class MessageApp implements IDatabaseObserver , ISessionObserver {
 
 	}
 
-
+/*
 	@Override
 	public void notifyLogin(User connectedUser) {
-		//afficher la deuxieme page d'acceuil
+
 	}
 
 	@Override
 	public void notifyLogout() {
 
+	}
+
+ */
+	@Override
+	public void addObserver(ISessionObserver observer) {
+
+	}
+
+	@Override
+	public void removeObserver(ISessionObserver observer) {
+
+	}
+
+	@Override
+	public void connect(User connectedUser) {
+		System.out.println("Utilisateur connecté: " + connectedUser.getName());
+
+	}
+
+	@Override
+	public void disconnect() {
+
+	}
+
+	@Override
+	public User getConnectedUser() {
+		return null;
 	}
 }

@@ -42,8 +42,8 @@ public class MessageAppLauncher {
 		messageApp.init();
 
 		messageApp.show();
-		ISession iSession= new Session();
-		iSession.addObserver(messageApp);
+		///ISession iSession= new Session();
+		//iSession.addObserver(messageApp);
 	//	LoginControlleur loginControlleur = new LoginControlleur(database, entityManager);
 	//	loginControlleur.init();
 

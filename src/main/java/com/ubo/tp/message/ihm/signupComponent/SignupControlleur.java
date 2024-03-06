@@ -5,10 +5,14 @@ import main.java.com.ubo.tp.message.core.database.IDatabase;
 import main.java.com.ubo.tp.message.core.database.IDatabaseObserver;
 import main.java.com.ubo.tp.message.datamodel.Message;
 import main.java.com.ubo.tp.message.datamodel.User;
+import main.java.com.ubo.tp.message.ihm.session.ISession;
+import main.java.com.ubo.tp.message.ihm.session.ISessionObserver;
 
 import javax.swing.*;
+import java.util.HashSet;
+import java.util.UUID;
 
-public class SignupControlleur implements IDatabaseObserver {
+public class SignupControlleur implements IDatabaseObserver, ISignupObserver  {
     private User user ;
 
     /**
@@ -23,6 +27,15 @@ public class SignupControlleur implements IDatabaseObserver {
 
     private SignupView loginView ;
 
+    private ISession session ;
+
+    public ISession getSession() {
+        return session;
+    }
+
+    public void setSession(ISession session) {
+        this.session = session;
+    }
 
     public SignupControlleur(IDatabase database, EntityManager entityManager) {
         this.mDatabase = database;
@@ -51,6 +64,7 @@ public class SignupControlleur implements IDatabaseObserver {
     protected void initGui() {
         loginView = new SignupView();
         //mMainView = new MessageAppMainView();
+        loginView.setSignupObserver(this);
         loginView.initGUI();
     }
 
@@ -96,5 +110,31 @@ public class SignupControlleur implements IDatabaseObserver {
 
     }
 
+    @Override
+    public void onSignupAttempt(String username, String tag, String avatarPath) {
+        if(this.mEntityManager.isTagUnique(tag)){
+            User newUser = new User(UUID.randomUUID(), tag, "--", username, new HashSet<>(), avatarPath);
+            mEntityManager.writeUserFile(newUser); // Génère le fichier utilisateur
+            this.mDatabase.addUser(newUser); // Ajoute l'utilisateur à la base de données
+            onSignupSuccess(newUser); // Implémentez cette méthode selon vos besoins
+        } else {
+        onSignupFailure("Le tag est déjà utilisé.");
+        }
+    }
 
+    @Override
+    public void onSignupFailure(String errorMessage) {
+        System.err.println(errorMessage);
+
+    }
+
+    @Override
+    public void onSignupSuccess(User newUser) {
+        System.out.println("Inscription réussie");
+        // Notifiez le succès de l'inscription à MessageApp ou à l'observateur de session
+        if (this.session != null) {
+            session.connect(newUser); // Démarrez une session pour l'utilisateur nouvellement inscrit
+        }
+
+    }
 }

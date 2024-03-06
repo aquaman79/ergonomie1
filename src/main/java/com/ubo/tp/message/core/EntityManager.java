@@ -65,6 +65,10 @@ public class EntityManager implements IWatchableDirectoryObserver {
 		this.mUserMap.put(unknowUser.getUuid(), unknowUser);
 	}
 
+	public boolean isTagUnique(String tag) {
+		return mUserMap.values().stream().noneMatch(user -> user.getUserTag().equals(tag));
+	}
+
 	/**
 	 * {@inheritDoc}
 	 */
