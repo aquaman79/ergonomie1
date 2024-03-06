@@ -1,6 +1,7 @@
 package main.java.com.ubo.tp.message.ihm;
 
 import java.io.File;
+import java.time.LocalDate;
 
 import main.java.com.ubo.tp.message.IMessageAppObserver;
 import main.java.com.ubo.tp.message.core.EntityManager;
@@ -12,6 +13,9 @@ import main.java.com.ubo.tp.message.datamodel.Message;
 import main.java.com.ubo.tp.message.datamodel.User;
 import main.java.com.ubo.tp.message.ihm.loginComponent.SigninControlleur;
 import main.java.com.ubo.tp.message.ihm.loginComponent.SigninVue;
+import main.java.com.ubo.tp.message.ihm.messageComponent.MessageControleur;
+import main.java.com.ubo.tp.message.ihm.messageComponent.MessageInputView;
+import main.java.com.ubo.tp.message.ihm.messageComponent.MessageView;
 import main.java.com.ubo.tp.message.ihm.session.ISession;
 import main.java.com.ubo.tp.message.ihm.session.ISessionObserver;
 import main.java.com.ubo.tp.message.ihm.session.Session;
@@ -36,10 +40,14 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 
 	private SignupControlleur signupControlleur;
 
+	private MessageControleur messageControleur ;
+
 	/**
 	 * Gestionnaire des entités contenu de la base de données.
 	 */
 	protected EntityManager mEntityManager;
+
+	protected  User user ;
 
 	/**
 	 * Vue principale de l'application.
@@ -84,6 +92,7 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 		this.session = new Session();
 		this.session.addObserver(this);
 		signinControlleur = new SigninControlleur(database,entityManager,this.session);
+		messageControleur = new MessageControleur(this.mDatabase, this.mEntityManager,this.user);
 	}
 
 	/**
@@ -130,7 +139,13 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 
 		SignupView signupView = new SignupView(signupControlleur);
 		signupView.initGUI();
-		mMainView.changeCotent(signupView.getContentPane());
+
+		MessageView messageView = new MessageView(new MessageControleur(this.mDatabase, this.mEntityManager,this.user));
+		//messageView.initGUI(this.user.getName(), "Ceci est un message de chat qui peut être plus long et occuper plusieurs lignes dans la vue.", LocalDate.now().toString());
+		MessageInputView messageInputView = new MessageInputView(messageControleur);
+		messageInputView.initGUI();
+		mMainView.changeCotent(messageInputView.getContentPane());
+		//mMainView.changeCotent(messageView.getContentPane());
 	}
 
 	/**
@@ -180,7 +195,7 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 //database interfce
 	@Override
 	public void notifyMessageAdded(Message addedMessage) {
-		System.out.println("Message added");
+		System.out.println("voici mon message"+addedMessage.getText());
 	}
 
 	@Override
@@ -198,7 +213,7 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 		if(mMainView == null) {
 			this.initGui();
 		}
-
+		this.user = addedUser ;
 		SigninVue signinVue = new SigninVue(signinControlleur);
 		signinVue.initGUI();
 		mMainView.changeCotent(signinVue.getContentPane());
