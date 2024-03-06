@@ -22,14 +22,14 @@ import javax.swing.*;
  *
  * @author S.Lucas
  */
-public class MessageApp implements IDatabaseObserver , IMessageAppObserver, ISession {
+public class MessageApp implements IDatabaseObserver,ISessionObserver {
 	/**
 	 * Base de données.
 	 */
 	protected IDatabase mDatabase;
 
 
-	private SigninControlleur loginControlleur ;
+	private SigninControlleur signinControlleur ;
 
 	private SignupControlleur signupControlleur;
 
@@ -60,27 +60,13 @@ public class MessageApp implements IDatabaseObserver , IMessageAppObserver, ISes
 
 
 	public SigninControlleur getLoginControlleur() {
-		return loginControlleur;
+		return signinControlleur;
 	}
 
-	public void setLoginControlleur(SigninControlleur loginControlleur) {
-		this.loginControlleur = loginControlleur;
+	public void setLoginControlleur(SigninControlleur signinControlleur) {
+		this.signinControlleur = signinControlleur;
 	}
 
-
-
-
-		@Override
-		public void onUserSignupCompleted(User user) {
-			System.out.println("User added: " + user.getName());
-			// Procédez ici à l'affichage de la page principale ou à d'autres actions post-inscription
-		}
-
-		@Override
-		public void onUserSignupFailed(String errorMessage) {
-			System.err.println(errorMessage);
-			// Affichez ici un message d'erreur à l'utilisateur
-		}
 	/**
 	 * Constructeur.
 	 *
@@ -90,7 +76,7 @@ public class MessageApp implements IDatabaseObserver , IMessageAppObserver, ISes
 	public MessageApp(IDatabase database, EntityManager entityManager) {
 		this.mDatabase = database;
 		this.mEntityManager = entityManager;
-		loginControlleur = new SigninControlleur(database,entityManager);
+		signinControlleur = new SigninControlleur(database,entityManager);
 		signupControlleur = new SignupControlleur(database,entityManager);
 
 	}
@@ -108,8 +94,10 @@ public class MessageApp implements IDatabaseObserver , IMessageAppObserver, ISes
 		// Initialisation de l'IHM
 		this.initGui();
 	//	this.loginControlleur.init();
-		this.signupControlleur.setSession(this);
+	//	this.signupControlleur.setSession(this);
+	//	this.signinControlleur.setSession(this);
 		this.signupControlleur.init();
+	//	this.signinControlleur.init();
 	}
 
 	/**
@@ -133,7 +121,8 @@ public class MessageApp implements IDatabaseObserver , IMessageAppObserver, ISes
 	protected void initGui() {
 		mMainView = new MessageAppMainView(mDatabase, mEntityManager);
 		//mMainView = new MessageAppMainView();
-		mMainView.initGUI();
+		//mMainView.initGUI();
+		mMainView.initGUISignup(signupControlleur);
 	}
 
 	/**
@@ -174,12 +163,13 @@ public class MessageApp implements IDatabaseObserver , IMessageAppObserver, ISes
 		if(mMainView == null) {
 			this.initGui();
 		}
-		//mMainView.showGUI();
+		mMainView.showGUI();
 		//loginControlleur.show();
 
-		signupControlleur.show();
+	//	signupControlleur.show();
+	//	signinControlleur.show();
 	}
-
+//database interfce
 	@Override
 	public void notifyMessageAdded(Message addedMessage) {
 		System.out.println("Message added");
@@ -214,42 +204,14 @@ public class MessageApp implements IDatabaseObserver , IMessageAppObserver, ISes
 	public void notifyUserSignin(String name, String password) {
 
 	}
-
-/*
+//IssessionObserver
 	@Override
 	public void notifyLogin(User connectedUser) {
-
+		System.out.println("login done");
 	}
 
 	@Override
 	public void notifyLogout() {
 
-	}
-
- */
-	@Override
-	public void addObserver(ISessionObserver observer) {
-
-	}
-
-	@Override
-	public void removeObserver(ISessionObserver observer) {
-
-	}
-
-	@Override
-	public void connect(User connectedUser) {
-		System.out.println("Utilisateur connecté: " + connectedUser.getName());
-
-	}
-
-	@Override
-	public void disconnect() {
-
-	}
-
-	@Override
-	public User getConnectedUser() {
-		return null;
 	}
 }

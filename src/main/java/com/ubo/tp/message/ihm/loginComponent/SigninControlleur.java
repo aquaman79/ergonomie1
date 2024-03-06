@@ -5,6 +5,7 @@ import main.java.com.ubo.tp.message.core.database.IDatabase;
 import main.java.com.ubo.tp.message.core.database.IDatabaseObserver;
 import main.java.com.ubo.tp.message.datamodel.Message;
 import main.java.com.ubo.tp.message.datamodel.User;
+import main.java.com.ubo.tp.message.ihm.session.ISession;
 import main.java.com.ubo.tp.message.ihm.session.Session;
 
 import javax.swing.*;
@@ -12,7 +13,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-public class SigninControlleur implements IDatabaseObserver {
+public class SigninControlleur implements IDatabaseObserver, ISigninObserver {
     private User user ;
 
     /**
@@ -27,8 +28,15 @@ public class SigninControlleur implements IDatabaseObserver {
 
     private SigninVue loginView ;
 
-    private Session msession ;
+    private ISession msession ;
 
+    public ISession getSession() {
+        return msession;
+    }
+
+    public void setSession(ISession msession) {
+        this.msession = msession;
+    }
 
     public SigninControlleur(IDatabase database, EntityManager entityManager) {
         this.mDatabase = database;
@@ -58,6 +66,8 @@ public class SigninControlleur implements IDatabaseObserver {
         loginView = new SigninVue();
         //mMainView = new MessageAppMainView();
         loginView.setDatabaseObserver(this);
+        loginView.setSiggninObserver(this);
+
         loginView.initGUI();
     }
 
@@ -114,5 +124,28 @@ public class SigninControlleur implements IDatabaseObserver {
 
     }
 
+
+    @Override
+    public void onSigninAttempt(String username, String tag) {
+        for(User user : this.mDatabase.getUsers()){
+            if(user.getUserTag().equals(tag)){
+                if(user.getName().equals(username)){
+                    this.msession.connect(user);
+                    return ;
+                }
+            }
+        }
+        onSigninFailure("Authentification erreur");
+    }
+
+    @Override
+    public void onSigninFailure(String errorMessage) {
+        System.err.println(errorMessage);
+    }
+
+    @Override
+    public void onSigninSuccess(User newUser) {
+
+    }
 
 }

@@ -5,6 +5,8 @@ import main.java.com.ubo.tp.message.core.EntityManager;
 import main.java.com.ubo.tp.message.core.database.IDatabase;
 import main.java.com.ubo.tp.message.datamodel.Message;
 import main.java.com.ubo.tp.message.datamodel.User;
+import main.java.com.ubo.tp.message.ihm.signupComponent.SignupControlleur;
+import main.java.com.ubo.tp.message.ihm.signupComponent.SignupView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -36,9 +38,23 @@ public class MessageAppMainView {
      */
     protected EntityManager mEntityManager;
 
+    private JPanel contentPaneHome;
+
+
     public MessageAppMainView(IDatabase database, EntityManager entityManager) {
         this.mDatabase = database;
         this.mEntityManager = entityManager;
+    }
+
+    protected void initGUISignup(SignupControlleur signupControlleur) {
+        if(mFrame == null) {
+            this.initGUI();
+        }
+
+        SignupView signupView = new SignupView();
+        signupView.setSignupObserver(signupControlleur);
+        signupView.initGUI();
+        mFrame.add(signupView.getContentPane());
     }
 
     /**
@@ -154,68 +170,6 @@ public class MessageAppMainView {
         //
         // Gestion de la base de données
 
-        JLabel dbLabel = new JLabel("Database");
-
-        Button addUserButton = new Button("Add User");
-        addUserButton.setPreferredSize(new Dimension(100, 50));
-        addUserButton.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                MessageAppMainView.this.addUserInDatabase();
-            }
-        });
-
-        Button addMessageButton = new Button("Add Message");
-        addMessageButton.setPreferredSize(new Dimension(100, 50));
-        addMessageButton.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                MessageAppMainView.this.addMessageInDatabase();
-            }
-        });
-
-        //
-        // Gestion des fichiers
-
-        JLabel fileLabel = new JLabel("Files");
-
-        Button sendUserButton = new Button("Write User");
-        sendUserButton.setPreferredSize(new Dimension(100, 50));
-        sendUserButton.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                MessageAppMainView.this.writeUser();
-            }
-        });
-
-        Button sendMessageButton = new Button("Write Message");
-        sendMessageButton.setPreferredSize(new Dimension(100, 50));
-        sendMessageButton.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                MessageAppMainView.this.writeMessage();
-            }
-        });
-
-        //
-        // Ajout des composants à la fenêtre
-        this.mFrame.add(dbLabel, new GridBagConstraints(0, 0, 2, 1, 1, 1, GridBagConstraints.CENTER,
-                GridBagConstraints.NONE, new Insets(5, 5, 0, 5), 0, 0));
-        this.mFrame.add(addUserButton, new GridBagConstraints(0, 1, 1, 1, 1, 1, GridBagConstraints.WEST,
-                GridBagConstraints.BOTH, new Insets(5, 5, 5, 5), 0, 0));
-        this.mFrame.add(addMessageButton, new GridBagConstraints(1, 1, 1, 1, 1, 1, GridBagConstraints.EAST,
-                GridBagConstraints.BOTH, new Insets(5, 5, 5, 5), 0, 0));
-        this.mFrame.add(fileLabel, new GridBagConstraints(0, 2, 2, 1, 1, 1, GridBagConstraints.CENTER,
-                GridBagConstraints.NONE, new Insets(15, 5, 0, 5), 0, 0));
-        this.mFrame.add(sendUserButton, new GridBagConstraints(0, 3, 1, 1, 1, 1, GridBagConstraints.WEST,
-                GridBagConstraints.BOTH, new Insets(5, 5, 5, 5), 0, 0));
-        this.mFrame.add(sendMessageButton, new GridBagConstraints(1, 3, 1, 1, 1, 1, GridBagConstraints.EAST,
-                GridBagConstraints.BOTH, new Insets(5, 5, 5, 5), 0, 0));
-
     }
 
     /**
@@ -321,5 +275,80 @@ public class MessageAppMainView {
 
 //    public File getFolder() {
 //    }
+
+
+    protected void initGUIHome() {
+        contentPaneHome = new JPanel(null) {
+            @Override
+            public Dimension getPreferredSize() {
+                return new Dimension(1014, 597);
+            }
+        };
+
+        //
+        // Gestion de la base de données
+
+        JLabel dbLabel = new JLabel("Database");
+
+        Button addUserButton = new Button("Add User");
+        addUserButton.setPreferredSize(new Dimension(100, 50));
+        addUserButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                MessageAppMainView.this.addUserInDatabase();
+            }
+        });
+
+        Button addMessageButton = new Button("Add Message");
+        addMessageButton.setPreferredSize(new Dimension(100, 50));
+        addMessageButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                MessageAppMainView.this.addMessageInDatabase();
+            }
+        });
+
+        //
+        // Gestion des fichiers
+
+        JLabel fileLabel = new JLabel("Files");
+
+        Button sendUserButton = new Button("Write User");
+        sendUserButton.setPreferredSize(new Dimension(100, 50));
+        sendUserButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                MessageAppMainView.this.writeUser();
+            }
+        });
+
+        Button sendMessageButton = new Button("Write Message");
+        sendMessageButton.setPreferredSize(new Dimension(100, 50));
+        sendMessageButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                MessageAppMainView.this.writeMessage();
+            }
+        });
+
+        //
+        // Ajout des composants à la fenêtre
+        this.contentPaneHome.add(dbLabel, new GridBagConstraints(0, 0, 2, 1, 1, 1, GridBagConstraints.CENTER,
+                GridBagConstraints.NONE, new Insets(5, 5, 0, 5), 0, 0));
+        this.contentPaneHome.add(addUserButton, new GridBagConstraints(0, 1, 1, 1, 1, 1, GridBagConstraints.WEST,
+                GridBagConstraints.BOTH, new Insets(5, 5, 5, 5), 0, 0));
+        this.contentPaneHome.add(addMessageButton, new GridBagConstraints(1, 1, 1, 1, 1, 1, GridBagConstraints.EAST,
+                GridBagConstraints.BOTH, new Insets(5, 5, 5, 5), 0, 0));
+        this.contentPaneHome.add(fileLabel, new GridBagConstraints(0, 2, 2, 1, 1, 1, GridBagConstraints.CENTER,
+                GridBagConstraints.NONE, new Insets(15, 5, 0, 5), 0, 0));
+        this.contentPaneHome.add(sendUserButton, new GridBagConstraints(0, 3, 1, 1, 1, 1, GridBagConstraints.WEST,
+                GridBagConstraints.BOTH, new Insets(5, 5, 5, 5), 0, 0));
+        this.contentPaneHome.add(sendMessageButton, new GridBagConstraints(1, 3, 1, 1, 1, 1, GridBagConstraints.EAST,
+                GridBagConstraints.BOTH, new Insets(5, 5, 5, 5), 0, 0));
+    }
 }
 

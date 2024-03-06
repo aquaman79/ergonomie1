@@ -1,5 +1,4 @@
 package main.java.com.ubo.tp.message.ihm.session;
-
 import java.util.ArrayList;
 import java.util.List;
 

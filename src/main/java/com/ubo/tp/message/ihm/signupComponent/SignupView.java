@@ -40,10 +40,11 @@ public class SignupView {
     public void initGUI() {
         // Configuration initiale du cadre et du panneau
         frame = new JFrame("Inscription");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      /*  frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1014, 597); // Taille initiale
         frame.setLocationRelativeTo(null); // Centrer
         frame.setResizable(false);
+       */
 
         contentPane = new JPanel(null) {
             @Override
@@ -129,7 +130,7 @@ public class SignupView {
             }
         });
 
-        frame.setVisible(true);
+        //frame.setVisible(true);
     }
 
     public void showGUI() {
@@ -152,4 +153,10 @@ public class SignupView {
             }
         });
     }
+
+    public JPanel getContentPane() {
+        return contentPane;
+    }
+
+
 }

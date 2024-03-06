@@ -2,6 +2,7 @@ package main.java.com.ubo.tp.message.ihm.loginComponent;
 
 import main.java.com.ubo.tp.message.core.database.IDatabaseObserver;
 import main.java.com.ubo.tp.message.ihm.session.ISessionObserver;
+import main.java.com.ubo.tp.message.ihm.signupComponent.ISignupObserver;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -9,6 +10,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class SigninVue {
 
@@ -20,6 +22,9 @@ public class SigninVue {
     private JPanel contentPane;
 
     private  IDatabaseObserver databaseObserver;
+    private ISigninObserver siggninObserver;
+
+
 
     public IDatabaseObserver getDatabaseObserver() {
         return databaseObserver;
@@ -29,7 +34,13 @@ public class SigninVue {
         this.databaseObserver = databaseObserver;
     }
 
-    private ISessionObserver sSessionObserver;
+    public ISigninObserver getSiggninObserver() {
+        return siggninObserver;
+    }
+
+    public void setSiggninObserver(ISigninObserver siggninObserver) {
+        this.siggninObserver = siggninObserver;
+    }
 
     /**
      * Launch the application.
@@ -41,59 +52,73 @@ public class SigninVue {
      * Create the frame.
      */
     public void initGUI() {
-        this.frame = new JFrame("Login");
-        this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.frame.setResizable(false);
+            // Configuration initiale du cadre et du panneau
+            frame = new JFrame("Authentification");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setSize(1014, 597); // Taille initiale
+            frame.setLocationRelativeTo(null); // Centrer
+            frame.setResizable(false);
 
-        contentPane = new JPanel(new GridBagLayout());
-        contentPane.setBorder(new EmptyBorder(10, 10, 10, 10)); // Marges ajustées pour une apparence épurée
-        this.frame.setContentPane(contentPane);
+            contentPane = new JPanel(null) {
+                @Override
+                public Dimension getPreferredSize() {
+                    return new Dimension(1014, 597);
+                }
+            };
+            frame.setContentPane(contentPane);
 
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridwidth = GridBagConstraints.REMAINDER;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.weightx = 1;
-        gbc.insets = new Insets(5, 5, 5, 5);
+            int width = contentPane.getPreferredSize().width;
+            int height = contentPane.getPreferredSize().height;
 
-        // Nom d'utilisateur
-        gbc.anchor = GridBagConstraints.CENTER; // Centre les éléments pour une apparence plus équilibrée
-        JLabel lblUsername = new JLabel("Nom d'utilisateur:");
-        lblUsername.setFont(new Font("Arial", Font.PLAIN, 20));
-        contentPane.add(lblUsername, gbc);
+// Calcul de la largeur pour les champs de texte
+            int textFieldWidth = width / 3;
+            int fieldX = (width - textFieldWidth) / 2; // Position X centrée pour les champs de saisie
 
-        textField = new JTextField(10);
-        textField.setFont(new Font("Arial", Font.PLAIN, 20));
-        contentPane.add(textField, gbc);
+// Étiquette pour le nom d'utilisateur
+            JLabel lblUsername = new JLabel("Nom d'utilisateur :");
+            lblUsername.setFont(new Font("Tahoma", Font.PLAIN, 20));
+// Positionner l'étiquette directement à gauche du champ de saisie, en ajustant en fonction de la largeur estimée de l'étiquette
+            lblUsername.setBounds(fieldX - 220, height / 4 - 30, 200, 30);
+            contentPane.add(lblUsername);
 
-        // Mot de passe
-        JLabel lblPassword = new JLabel("Mot de passe:");
-        lblPassword.setFont(new Font("Arial", Font.PLAIN, 20));
-        contentPane.add(lblPassword, gbc);
+// Champ nom d'utilisateur
+            JTextField textField = new JTextField();
+            textField.setFont(new Font("Tahoma", Font.PLAIN, 32));
+            textField.setBounds(fieldX, height / 4 - 30, textFieldWidth, 50);
+            contentPane.add(textField);
 
-        passwordField = new JPasswordField(10);
-        passwordField.setFont(new Font("Arial", Font.PLAIN, 20));
-        contentPane.add(passwordField, gbc);
+// Étiquette pour le tag
+            JLabel lblTag = new JLabel("Tag :");
+            lblTag.setFont(new Font("Tahoma", Font.PLAIN, 20));
+// Positionner l'étiquette directement à gauche du champ de saisie pour le tag, similairement au nom d'utilisateur
+            lblTag.setBounds(fieldX - 220, height / 4 + 30, 200, 30);
+            contentPane.add(lblTag);
 
-        // Bouton de connexion
-        btnNewButton = new JButton("Se connecter");
-        btnNewButton.setFont(new Font("Arial", Font.BOLD, 20));
-        gbc.fill = GridBagConstraints.NONE; // Pas de remplissage pour le bouton pour qu'il ne s'étende pas trop horizontalement
-        contentPane.add(btnNewButton, gbc);
+// Champ pour le tag
+            JTextField tagField = new JTextField();
+            tagField.setFont(new Font("Tahoma", Font.PLAIN, 32));
+            tagField.setBounds(fieldX, height / 4 + 30, textFieldWidth, 50);
+            contentPane.add(tagField);
 
-        btnNewButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String userName = textField.getText();
-                String password = new String(passwordField.getPassword());
-                databaseObserver.notifyUserSignin(userName,password);
-            }
-        });
+            JButton btnSignup = new JButton("S'authentifier");
+            btnSignup.setFont(new Font("Tahoma", Font.PLAIN, 26));
+            btnSignup.setBounds((width - textFieldWidth) / 2, (int) (height / 4 + 120), textFieldWidth, 50);
+            contentPane.add(btnSignup);
 
-        this.frame.pack();
-        this.frame.setLocationRelativeTo(null); // Centrer la fenêtre
-    }
+            // Ajouter les écouteurs d'événements
+            btnSignup.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    // Implémentation de la logique d'inscription
+                    String userName = textField.getText();
+                    String tag = new String(tagField.getText());
+                    if (siggninObserver != null) {
+                        siggninObserver.onSigninAttempt(userName, tag);
+                    }
+                }
+            });
 
-
-
+           // frame.setVisible(true);
+        }
     public void showGUI() {
         if (this.frame == null) {
             this.initGUI();
