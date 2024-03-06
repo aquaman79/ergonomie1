@@ -112,14 +112,16 @@ public class SignupControlleur implements IDatabaseObserver, ISignupObserver  {
 
     @Override
     public void onSignupAttempt(String username, String tag, String avatarPath) {
-        if(this.mEntityManager.isTagUnique(tag)){
-            User newUser = new User(UUID.randomUUID(), tag, "--", username, new HashSet<>(), avatarPath);
-            mEntityManager.writeUserFile(newUser); // Génère le fichier utilisateur
-            this.mDatabase.addUser(newUser); // Ajoute l'utilisateur à la base de données
-            onSignupSuccess(newUser); // Implémentez cette méthode selon vos besoins
-        } else {
-        onSignupFailure("Le tag est déjà utilisé.");
+        for(User user : this.mDatabase.getUsers()){
+            if(user.getUserTag().equals(tag)){
+                onSignupFailure("Le tag est déjà utilisé.");
+                return ;
+            }
         }
+        User newUser = new User(UUID.randomUUID(), tag, "--", username, new HashSet<>(), avatarPath);
+        this.mDatabase.addUser(newUser);
+        mEntityManager.writeUserFile(newUser); // Génère le fichier utilisateur
+        onSignupSuccess(newUser);
     }
 
     @Override
@@ -130,11 +132,7 @@ public class SignupControlleur implements IDatabaseObserver, ISignupObserver  {
 
     @Override
     public void onSignupSuccess(User newUser) {
-        System.out.println("Inscription réussie");
-        // Notifiez le succès de l'inscription à MessageApp ou à l'observateur de session
-        if (this.session != null) {
-            session.connect(newUser); // Démarrez une session pour l'utilisateur nouvellement inscrit
-        }
+        System.out.println("Inscription réussie coté controlleur  signup");
 
     }
 }
