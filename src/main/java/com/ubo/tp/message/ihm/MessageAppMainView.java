@@ -18,6 +18,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
@@ -29,6 +30,10 @@ public class MessageAppMainView {
      * Fenetre du bouchon
      */
     protected JFrame mFrame;
+
+    protected Box hBox;
+
+    protected Box vBox;
 
 
     protected JFrame acceuilFrame;
@@ -132,6 +137,12 @@ public class MessageAppMainView {
     protected void initGUI() {
 
         this.mFrame = new JFrame("MessageApp");
+        hBox = Box.createHorizontalBox();
+        vBox = Box.createVerticalBox();
+        hBox.add(new JLabel());
+        hBox.add(vBox);
+
+        mFrame.getContentPane().add(hBox);
         ImageIcon icon = new ImageIcon(MessageAppMainView.class.getClassLoader().getResource("logo_20.png"));
         mFrame.setIconImage(icon.getImage());
         mFrame.setLayout(new GridBagLayout());
@@ -434,12 +445,22 @@ public class MessageAppMainView {
                 GridBagConstraints.BOTH, new Insets(5, 5, 5, 5), 0, 0));
     }
 
-    public void changeCotent(JPanel panel)
+    public void changeCotent(List<JPanel> panels)
     {
-        mFrame.getContentPane().removeAll();
-        mFrame.getContentPane().add(panel);
+        vBox.removeAll();
+        for(JPanel panel: panels) {
+            vBox.add(panel);
+        }
         mFrame.revalidate();
         mFrame.repaint();
+    }
+
+    public void addProfilBlock(JPanel panel) {
+        panel.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
+        panel.setBackground(Color.GRAY);
+        Dimension preferredSize = new Dimension(100, 20);
+        panel.setPreferredSize(preferredSize);
+        hBox.add(panel, 0);
     }
 
     public void addComponentAsFirst(JPanel panel) {

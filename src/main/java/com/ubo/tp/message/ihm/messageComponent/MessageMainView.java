@@ -5,8 +5,6 @@ import main.java.com.ubo.tp.message.datamodel.User;
 
 import javax.swing.*;
 import java.awt.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Set;
 
@@ -18,7 +16,6 @@ public class MessageMainView {
     private Box vBox;
 
     private Box vBoxMessages;
-
     MessageObserver messageObserver;
 
     public MessageMainView(MessageObserver messageObserver, User user, Message message) {
