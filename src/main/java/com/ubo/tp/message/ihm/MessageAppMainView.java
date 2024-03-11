@@ -297,8 +297,11 @@ public class MessageAppMainView {
      */
     protected void addUserInDatabase() {
         // Création d'un utilisateur fictif
-        this.initGUI();
-        this.showGUI();
+      //  this.initGUI();
+        //this.showGUI();
+        MessageApp messageApp = new MessageApp(this.mDatabase,this.mEntityManager);
+        messageApp.init();
+        messageApp.show();
       //  User newUser = this.generateUser();
       //  this.initGUI();
         // Ajout de l'utilisateur à la base
