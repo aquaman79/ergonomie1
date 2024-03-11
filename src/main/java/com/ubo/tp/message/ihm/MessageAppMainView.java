@@ -247,7 +247,7 @@ public class MessageAppMainView {
         menu.add(aproposItem);
 
         mFrame.setJMenuBar(menu);
-        mFrame.setVisible(true);
+     //   mFrame.setVisible(true);
         //
         // Gestion de la base de données
 
@@ -298,6 +298,7 @@ public class MessageAppMainView {
     protected void addUserInDatabase() {
         // Création d'un utilisateur fictif
         this.initGUI();
+        this.showGUI();
       //  User newUser = this.generateUser();
       //  this.initGUI();
         // Ajout de l'utilisateur à la base
