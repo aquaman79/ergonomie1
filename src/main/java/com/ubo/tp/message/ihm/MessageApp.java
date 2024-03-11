@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import main.java.com.ubo.tp.message.IMessageAppObserver;
 import main.java.com.ubo.tp.message.core.EntityManager;
@@ -15,6 +16,8 @@ import main.java.com.ubo.tp.message.core.directory.IWatchableDirectory;
 import main.java.com.ubo.tp.message.core.directory.WatchableDirectory;
 import main.java.com.ubo.tp.message.datamodel.Message;
 import main.java.com.ubo.tp.message.datamodel.User;
+import main.java.com.ubo.tp.message.ihm.abonneComponent.AbonneControleur;
+import main.java.com.ubo.tp.message.ihm.abonneComponent.AbonneListView;
 import main.java.com.ubo.tp.message.ihm.loginComponent.SigninControlleur;
 import main.java.com.ubo.tp.message.ihm.loginComponent.SigninVue;
 import main.java.com.ubo.tp.message.ihm.messageComponent.MessageControleur;
@@ -55,6 +58,8 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 
 	private ProfilControlleur profilControlleur;
 
+	private AbonneControleur abonneControleur;
+
 
 	/**
 	 * Gestionnaire des entités contenu de la base de données.
@@ -91,6 +96,8 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 	private RechercheView rechercheView;
 
 	private ProfilView profilView;
+
+	private AbonneListView abonneListView;
 
 	public SigninControlleur getLoginControlleur() {
 		return signinControlleur;
@@ -302,6 +309,12 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 		profilView = new ProfilView(profilControlleur);
 		profilView.initGUI(connectedUser);
 
+		abonneControleur = new AbonneControleur();
+		abonneListView = new AbonneListView(abonneControleur);
+		abonneListView.initGUI();
+		Set<User> utilisateurs = mDatabase.getUsers().stream().filter(u -> u.getUserTag() != this.user.getUserTag()).collect(Collectors.toSet());
+		abonneListView.addAbonnes(utilisateurs, user);
+
 		rechercheView = new RechercheView(rechercheControlleur);
 		rechercheView.initGUI();
 
@@ -312,13 +325,15 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 		panels.add(rechercheView.getContentPane());
 		panels.add(messageMainView.getContentPane());
 
-		mMainView.addProfilBlock(profilView.getContentPane());
+		List<JPanel> panelsProfil = new ArrayList<>();
+		panelsProfil.add(profilView.getContentPane());
+		panelsProfil.add(abonneListView.getContentPane());
+		mMainView.addProfilBlock(panelsProfil);
 		mMainView.changeCotent(panels);
 	}
 
 	@Override
 	public void notifyLogout() {
-
 	}
 
 

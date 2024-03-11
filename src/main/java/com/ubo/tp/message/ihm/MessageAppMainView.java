@@ -35,6 +35,8 @@ public class MessageAppMainView {
 
     protected Box vBox;
 
+    protected Box vBoxProfil;
+
 
     protected JFrame acceuilFrame;
 
@@ -139,7 +141,12 @@ public class MessageAppMainView {
         this.mFrame = new JFrame("MessageApp");
         hBox = Box.createHorizontalBox();
         vBox = Box.createVerticalBox();
-        hBox.add(new JLabel());
+        vBoxProfil = Box.createVerticalBox();
+        vBoxProfil.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
+        vBoxProfil.setBackground(Color.GRAY);
+        Dimension preferredSize = new Dimension(200, 20);
+        vBoxProfil.setPreferredSize(preferredSize);
+        hBox.add(vBoxProfil);
         hBox.add(vBox);
 
         mFrame.getContentPane().add(hBox);
@@ -456,13 +463,17 @@ public class MessageAppMainView {
         mFrame.repaint();
     }
 
-    public void addProfilBlock(JPanel panel) {
-        panel.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
+    public void addProfilBlock(List<JPanel> panels) {
+        /*panel.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
         panel.setBackground(Color.GRAY);
         Dimension preferredSize = new Dimension(100, 20);
-        panel.setPreferredSize(preferredSize);
-        hBox.add(panel, 0);
+        panel.setPreferredSize(preferredSize);*/
+
+        for(JPanel panel: panels) {
+            vBoxProfil.add(panel);
+        }
     }
+
 
     public void addComponentAsFirst(JPanel panel) {
         mFrame.getContentPane().add(panel, 0);
