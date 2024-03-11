@@ -277,15 +277,6 @@ public class MessageAppMainView {
 
                 MessageAppMainView.this.mFrame.pack();
 
-                if(acceuilFrame ==null){
-                    MessageAppMainView.this.initAcceuil();
-                }
-
-                JFrame frame2 = MessageAppMainView.this.acceuilFrame;
-                frame2.setLocation((screenSize.width - frame.getWidth()) / 6,
-                        (screenSize.height - frame.getHeight()) / 4);
-                // Affichage
-                MessageAppMainView.this.acceuilFrame.setVisible(true);
             }
         });
     }
@@ -295,7 +286,9 @@ public class MessageAppMainView {
             this.initAcceuil();
         }
 
-        MessageAppMainView.this.acceuilFrame.pack();
+        this.acceuilFrame.setVisible(true);
+
+        this.acceuilFrame.pack();
     }
 
     /**
