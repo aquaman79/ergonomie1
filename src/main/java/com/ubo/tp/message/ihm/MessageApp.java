@@ -301,6 +301,19 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 	@Override
 	public void notifyUserModified(User modifiedUser) {
 
+		profilView = new ProfilView(profilControlleur);
+		profilView.initGUI(this.user);
+
+//		abonneControleur = new AbonneControleur();
+		abonneListView = new AbonneListView(abonneControleur);
+		abonneListView.initGUI();
+		Set<User> utilisateurs = mDatabase.getUsers().stream().filter(u -> u.getUserTag() != this.user.getUserTag()).collect(Collectors.toSet());
+		abonneListView.addAbonnes(utilisateurs, user);
+
+		List<JPanel> panelsProfil = new ArrayList<>();
+		panelsProfil.add(profilView.getContentPane());
+		panelsProfil.add(abonneListView.getContentPane());
+
 		List<JPanel> panelsAbonnes = new ArrayList<>();
 
 		for(User follower: mDatabase.getFollowers(this.user)) {
@@ -309,6 +322,7 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 			panelsAbonnes.add(followerView.getContentPane());
 		}
 
+		mMainView.addProfilBlock(panelsProfil);
 		mMainView.addAbonnesBlock(panelsAbonnes);
 		mMainView.refresh();
 	}

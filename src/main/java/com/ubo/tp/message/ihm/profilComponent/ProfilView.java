@@ -35,4 +35,5 @@ public class ProfilView {
     public JPanel getContentPane() {
         return contentPane;
     }
+
 }
