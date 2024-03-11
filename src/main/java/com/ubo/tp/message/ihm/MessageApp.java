@@ -2,7 +2,9 @@ package main.java.com.ubo.tp.message.ihm;
 
 import java.io.File;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import main.java.com.ubo.tp.message.IMessageAppObserver;
@@ -19,6 +21,8 @@ import main.java.com.ubo.tp.message.ihm.messageComponent.MessageControleur;
 import main.java.com.ubo.tp.message.ihm.messageComponent.MessageInputView;
 import main.java.com.ubo.tp.message.ihm.messageComponent.MessageMainView;
 import main.java.com.ubo.tp.message.ihm.messageComponent.MessageView;
+import main.java.com.ubo.tp.message.ihm.profilComponent.ProfilControlleur;
+import main.java.com.ubo.tp.message.ihm.profilComponent.ProfilView;
 import main.java.com.ubo.tp.message.ihm.rechercheComponent.RechercheControlleur;
 import main.java.com.ubo.tp.message.ihm.rechercheComponent.RechercheView;
 import main.java.com.ubo.tp.message.ihm.session.ISession;
@@ -48,6 +52,8 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 	private MessageControleur messageControleur;
 
 	private RechercheControlleur rechercheControlleur ;
+
+	private ProfilControlleur profilControlleur;
 
 
 	/**
@@ -84,6 +90,8 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 
 	private RechercheView rechercheView;
 
+	private ProfilView profilView;
+
 	public SigninControlleur getLoginControlleur() {
 		return signinControlleur;
 	}
@@ -107,6 +115,7 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 		signinControlleur = new SigninControlleur(database, entityManager, this.session);
 		messageControleur = new MessageControleur(this.mDatabase, this.mEntityManager, this.user);
 		rechercheControlleur = new RechercheControlleur(this.mDatabase);
+		profilControlleur = new ProfilControlleur();
 
 	//	this.mDatabase.addObserver(this);
 	}
@@ -156,7 +165,9 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 
 		SignupView signupView = new SignupView(signupControlleur);
 		signupView.initGUI();
-		mMainView.changeCotent(signupView.getContentPane());
+		List<JPanel> panels = new ArrayList<>();
+		panels.add(signupView.getContentPane());
+		mMainView.changeCotent(panels);
 	}
 
 	/**
@@ -212,10 +223,12 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 		}
 		this.message = addedMessage;
 		messageMainView.addMessage(message);
-		mMainView.changeCotent(messageMainView.getContentPane());
+		List<JPanel> panels = new ArrayList<>();
+		panels.add(rechercheView.getContentPane());
+		panels.add(messageMainView.getContentPane());
+		mMainView.changeCotent(panels);
 		//RechercheView rechercheView = new RechercheView(rechercheControlleur);
 		//rechercheView.initGUI();
-		mMainView.addComponentAsFirst(rechercheView.getContentPane());
 	}
 
 	@Override
@@ -236,7 +249,9 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 		this.user = addedUser;
 		SigninVue signinVue = new SigninVue(signinControlleur);
 		signinVue.initGUI();
-		mMainView.changeCotent(signinVue.getContentPane());
+		List<JPanel> panels = new ArrayList<>();
+		panels.add(signinVue.getContentPane());
+		mMainView.changeCotent(panels);
 		System.out.println("User added");
 	}
 
@@ -254,9 +269,10 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 	@Override
 	public void notifyMessageFiltred(Set<Message> message) {
 		messageMainView.viewMessageFiltre(message);
-		mMainView.changeCotent(messageMainView.getContentPane());
-		mMainView.addComponentAsFirst(rechercheView.getContentPane());
-
+		List<JPanel> panels = new ArrayList<>();
+		panels.add(rechercheView.getContentPane());
+		panels.add(messageMainView.getContentPane());
+		mMainView.changeCotent(panels);
 	}
 
 	//IssessionObserver
@@ -266,13 +282,22 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 			this.initGui();
 		}
 		this.user = connectedUser;
+
+		profilView = new ProfilView(profilControlleur);
+		profilView.initGUI(connectedUser);
+
+		rechercheView = new RechercheView(rechercheControlleur);
+		rechercheView.initGUI();
+
 		messageMainView = new MessageMainView(messageControleur, this.user, this.message);
 		messageMainView.initGUI();
-		 rechercheView = new RechercheView(rechercheControlleur);
 
-		rechercheView.initGUI();
-		mMainView.changeCotent(messageMainView.getContentPane());
-		mMainView.addComponentAsFirst(rechercheView.getContentPane());
+		List<JPanel> panels = new ArrayList<>();
+		panels.add(rechercheView.getContentPane());
+		panels.add(messageMainView.getContentPane());
+
+		mMainView.addProfilBlock(profilView.getContentPane());
+		mMainView.changeCotent(panels);
 	}
 
 	@Override
