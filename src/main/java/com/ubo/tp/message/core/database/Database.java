@@ -270,4 +270,19 @@ public class Database implements IDatabase {
 	protected Set<IDatabaseObserver> getObservers() {
 		return new HashSet<>(this.mObservers);
 	}
+
+
+	public Set<Message> getMessagesContainingText(String text) {
+		Set<Message> filteredMessages = new HashSet<>();
+		for (Message message : this.getMessages()) {
+			if (message.getText().contains(text)) {
+				filteredMessages.add(message);
+			}
+		}
+		for (IDatabaseObserver observer : mObservers) {
+				observer.notifyMessageFiltred(filteredMessages);
+
+		}
+		return filteredMessages;
+	}
 }

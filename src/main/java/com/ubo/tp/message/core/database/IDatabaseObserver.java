@@ -3,6 +3,8 @@ package main.java.com.ubo.tp.message.core.database;
 import main.java.com.ubo.tp.message.datamodel.Message;
 import main.java.com.ubo.tp.message.datamodel.User;
 
+import java.util.Set;
+
 /**
  * Interface des observateurs des modifications de la base de données.
  *
@@ -51,5 +53,6 @@ public interface IDatabaseObserver {
 	 */
 	void notifyUserModified(User modifiedUser);
 
-	void notifyUserSignin(String name, String password);
+
+	void notifyMessageFiltred(Set<Message> message);
 }

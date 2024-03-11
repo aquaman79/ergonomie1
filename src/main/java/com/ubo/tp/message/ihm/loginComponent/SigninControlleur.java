@@ -13,7 +13,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-public class SigninControlleur implements IDatabaseObserver, ISigninObserver {
+public class SigninControlleur implements ISigninObserver {
     private User user ;
 
     /**
@@ -56,37 +56,6 @@ public class SigninControlleur implements IDatabaseObserver, ISigninObserver {
         }
     }
 
-    @Override
-    public void notifyMessageAdded(Message addedMessage) {
-
-    }
-
-    @Override
-    public void notifyMessageDeleted(Message deletedMessage) {
-
-    }
-
-    @Override
-    public void notifyMessageModified(Message modifiedMessage) {
-
-    }
-
-    @Override
-    public void notifyUserAdded(User addedUser) {
-
-    }
-
-    @Override
-    public void notifyUserDeleted(User deletedUser) {
-
-    }
-
-    @Override
-    public void notifyUserModified(User modifiedUser) {
-
-    }
-
-    @Override
     public void notifyUserSignin(String name, String password) {
         System.out.println("succes");
         Set<User> users = this.mDatabase.getUsers();
@@ -101,6 +70,8 @@ public class SigninControlleur implements IDatabaseObserver, ISigninObserver {
         }
 
     }
+
+
 
 
     @Override

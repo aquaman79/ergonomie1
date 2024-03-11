@@ -8,6 +8,7 @@ import java.awt.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Set;
 
 public class MessageMainView {
     private Message message;
@@ -50,5 +51,12 @@ public class MessageMainView {
         messageView.initGUI(user.getName(), message.getText(), LocalTime.now().toString());
 
         vBoxMessages.add(messageView.getContentPane());
+    }
+
+    public void viewMessageFiltre(Set<Message> messages){
+        this.vBoxMessages.removeAll();
+        for(Message message1 : messages){
+            this.addMessage(message1);
+        }
     }
 }

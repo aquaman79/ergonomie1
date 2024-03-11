@@ -1,15 +1,12 @@
-package main.java.com.ubo.tp.message.ihm.messageComponent;
-
+package main.java.com.ubo.tp.message.ihm.rechercheComponent;
 
 import main.java.com.ubo.tp.message.core.EntityManager;
 import main.java.com.ubo.tp.message.core.database.IDatabase;
-import main.java.com.ubo.tp.message.datamodel.Message;
 import main.java.com.ubo.tp.message.datamodel.User;
 
 import javax.swing.*;
-import java.util.UUID;
 
-public class MessageControleur implements MessageObserver{
+public class RechercheControlleur implements IRechercheObserver {
     protected IDatabase mDatabase;
 
     /**
@@ -19,12 +16,11 @@ public class MessageControleur implements MessageObserver{
 
     protected User user;
 
-    private MessageView messageView;
+    private RechercheView rechercherView ;
 
-    public MessageControleur(IDatabase database, EntityManager entityManager,User user) {
+    public RechercheControlleur(IDatabase database) {
         this.mDatabase = database;
-        this.mEntityManager = entityManager;
-        this.user = user ;
+
     }
 
     protected void initLookAndFeel() {
@@ -36,19 +32,7 @@ public class MessageControleur implements MessageObserver{
     }
 
     @Override
-    public void sendMessage(String text) {
-        Message message = new Message(this.user, text) ;
-        this.mDatabase.addMessage(message);
+    public void filterMessages(String message) {
+        this.mDatabase.getMessagesContainingText(message);
     }
-
-/*
-    public void show() {
-        if(loginView == null) {
-            this.initGui();
-        }
-        loginView.showGUI();
-    }
- */
-
-
 }

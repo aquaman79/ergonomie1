@@ -2,6 +2,8 @@ package main.java.com.ubo.tp.message.ihm;
 
 import java.io.File;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 import main.java.com.ubo.tp.message.IMessageAppObserver;
 import main.java.com.ubo.tp.message.core.EntityManager;
@@ -17,6 +19,8 @@ import main.java.com.ubo.tp.message.ihm.messageComponent.MessageControleur;
 import main.java.com.ubo.tp.message.ihm.messageComponent.MessageInputView;
 import main.java.com.ubo.tp.message.ihm.messageComponent.MessageMainView;
 import main.java.com.ubo.tp.message.ihm.messageComponent.MessageView;
+import main.java.com.ubo.tp.message.ihm.rechercheComponent.RechercheControlleur;
+import main.java.com.ubo.tp.message.ihm.rechercheComponent.RechercheView;
 import main.java.com.ubo.tp.message.ihm.session.ISession;
 import main.java.com.ubo.tp.message.ihm.session.ISessionObserver;
 import main.java.com.ubo.tp.message.ihm.session.Session;
@@ -37,12 +41,13 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 	protected IDatabase mDatabase;
 
 
-	private SigninControlleur signinControlleur ;
+	private SigninControlleur signinControlleur;
 
 	private SignupControlleur signupControlleur;
 
-	private MessageControleur messageControleur ;
+	private MessageControleur messageControleur;
 
+	private RechercheControlleur rechercheControlleur ;
 
 
 	/**
@@ -50,7 +55,7 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 	 */
 	protected EntityManager mEntityManager;
 
-	protected  User user ;
+	protected User user;
 
 	/**
 	 * Vue principale de l'application.
@@ -74,8 +79,10 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 	 */
 	protected String mUiClassName;
 
-	private ISession session ;
+	private ISession session;
 	private Message message;
+
+	private RechercheView rechercheView;
 
 	public SigninControlleur getLoginControlleur() {
 		return signinControlleur;
@@ -94,11 +101,14 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 	public MessageApp(IDatabase database, EntityManager entityManager) {
 		this.mDatabase = database;
 		this.mEntityManager = entityManager;
-		signupControlleur = new SignupControlleur(database,entityManager);
+		signupControlleur = new SignupControlleur(database, entityManager);
 		this.session = new Session();
 		this.session.addObserver(this);
-		signinControlleur = new SigninControlleur(database,entityManager,this.session);
-		messageControleur = new MessageControleur(this.mDatabase, this.mEntityManager,this.user);
+		signinControlleur = new SigninControlleur(database, entityManager, this.session);
+		messageControleur = new MessageControleur(this.mDatabase, this.mEntityManager, this.user);
+		rechercheControlleur = new RechercheControlleur(this.mDatabase);
+
+	//	this.mDatabase.addObserver(this);
 	}
 
 	/**
@@ -113,11 +123,11 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 
 		// Initialisation de l'IHM
 		this.initGui();
-	//	this.loginControlleur.init();
-	//	this.signupControlleur.setSession(this);
-	//	this.signinControlleur.setSession(this);
+		//	this.loginControlleur.init();
+		//	this.signupControlleur.setSession(this);
+		//	this.signinControlleur.setSession(this);
 		//this.signupControlleur.init();
-	//	this.signinControlleur.init();
+		//	this.signinControlleur.init();
 	}
 
 	/**
@@ -130,7 +140,8 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 			// Pour utiliser un Look and Feel spécifique, remplacez getSystemLookAndFeelClassName() par le nom de classe du Look and Feel souhaité
 			// Exemple pour utiliser le Look and Feel Nimbus :
 			// UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
+				 UnsupportedLookAndFeelException e) {
 			e.printStackTrace();
 		}
 	}
@@ -183,16 +194,17 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 	}
 
 	public void show() {
-		if(mMainView == null) {
+		if (mMainView == null) {
 			this.initGui();
 		}
 		mMainView.showGUI();
 		//loginControlleur.show();
 
-	//	signupControlleur.show();
-	//	signinControlleur.show();
+		//	signupControlleur.show();
+		//	signinControlleur.show();
 	}
-//database interfce
+
+	//database interfce
 	@Override
 	public void notifyMessageAdded(Message addedMessage) {
 		if(mMainView == null) {
@@ -201,6 +213,9 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 		this.message = addedMessage;
 		messageMainView.addMessage(message);
 		mMainView.changeCotent(messageMainView.getContentPane());
+		//RechercheView rechercheView = new RechercheView(rechercheControlleur);
+		//rechercheView.initGUI();
+		mMainView.addComponentAsFirst(rechercheView.getContentPane());
 	}
 
 	@Override
@@ -215,10 +230,10 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 
 	@Override
 	public void notifyUserAdded(User addedUser) {
-		if(mMainView == null) {
+		if (mMainView == null) {
 			this.initGui();
 		}
-		this.user = addedUser ;
+		this.user = addedUser;
 		SigninVue signinVue = new SigninVue(signinControlleur);
 		signinVue.initGUI();
 		mMainView.changeCotent(signinVue.getContentPane());
@@ -235,11 +250,16 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 		System.out.println("User modified");
 	}
 
+
 	@Override
-	public void notifyUserSignin(String name, String password) {
+	public void notifyMessageFiltred(Set<Message> message) {
+		messageMainView.viewMessageFiltre(message);
+		mMainView.changeCotent(messageMainView.getContentPane());
+		mMainView.addComponentAsFirst(rechercheView.getContentPane());
 
 	}
-//IssessionObserver
+
+	//IssessionObserver
 	@Override
 	public void notifyLogin(User connectedUser) {
 		if(mMainView == null) {
@@ -248,11 +268,18 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 		this.user = connectedUser;
 		messageMainView = new MessageMainView(messageControleur, this.user, this.message);
 		messageMainView.initGUI();
+		 rechercheView = new RechercheView(rechercheControlleur);
+
+		rechercheView.initGUI();
 		mMainView.changeCotent(messageMainView.getContentPane());
+		mMainView.addComponentAsFirst(rechercheView.getContentPane());
 	}
 
 	@Override
 	public void notifyLogout() {
 
 	}
+
+
+
 }

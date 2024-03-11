@@ -134,4 +134,14 @@ public interface IDatabase {
 	 */
 	public User getUnknowUser();
 
+	/**
+	 * Retourne tous les messages contenant le texte spécifié.
+	 *
+	 * @param text , texte à rechercher dans les messages.
+	 * @return un ensemble de messages contenant le texte spécifié.
+	 */
+	Set<Message> getMessagesContainingText(String text);
+
+
+
 }

@@ -10,9 +10,10 @@ import main.java.com.ubo.tp.message.ihm.session.ISessionObserver;
 
 import javax.swing.*;
 import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
-public class SignupControlleur implements IDatabaseObserver, ISignupObserver  {
+public class SignupControlleur implements ISignupObserver  {
     private User user ;
 
     /**
@@ -74,40 +75,6 @@ public class SignupControlleur implements IDatabaseObserver, ISignupObserver  {
         loginView.showGUI();
     }
 
-    @Override
-    public void notifyMessageAdded(Message addedMessage) {
-
-    }
-
-    @Override
-    public void notifyMessageDeleted(Message deletedMessage) {
-
-    }
-
-    @Override
-    public void notifyMessageModified(Message modifiedMessage) {
-
-    }
-
-    @Override
-    public void notifyUserAdded(User addedUser) {
-
-    }
-
-    @Override
-    public void notifyUserDeleted(User deletedUser) {
-
-    }
-
-    @Override
-    public void notifyUserModified(User modifiedUser) {
-
-    }
-
-    @Override
-    public void notifyUserSignin(String name, String password) {
-
-    }
 
     @Override
     public void onSignupAttempt(String username, String tag, String avatarPath) {
