@@ -37,9 +37,7 @@ public class MessageMainView {
         messageInputView.initGUI();
         vBox.add(vBoxMessages);
         vBox.add(messageInputView.getContentPane());
-
         contentPane.add(vBox);
-
         contentPane.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
     }
 

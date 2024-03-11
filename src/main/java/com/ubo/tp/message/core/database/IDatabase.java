@@ -122,6 +122,7 @@ public interface IDatabase {
 	 */
 	Set<User> getFollowers(User user);
 
+
 	/**
 	 * Retourne le nombre de followers pour l'utilisateur donné.
 	 *

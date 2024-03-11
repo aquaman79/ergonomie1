@@ -119,9 +119,9 @@ public class MessageAppMainView {
                 GridBagConstraints.NONE, new Insets(5, 5, 0, 5), 0, 0));
         this.acceuilFrame.add(addUserButton, new GridBagConstraints(0, 1, 1, 1, 1, 1, GridBagConstraints.WEST,
                 GridBagConstraints.BOTH, new Insets(5, 5, 5, 5), 0, 0));
-        this.acceuilFrame.add(addMessageButton, new GridBagConstraints(1, 1, 1, 1, 1, 1, GridBagConstraints.EAST,
+       /* this.acceuilFrame.add(addMessageButton, new GridBagConstraints(1, 1, 1, 1, 1, 1, GridBagConstraints.EAST,
                 GridBagConstraints.BOTH, new Insets(5, 5, 5, 5), 0, 0));
-      /*  this.acceuilFrame.add(fileLabel, new GridBagConstraints(0, 2, 2, 1, 1, 1, GridBagConstraints.CENTER,
+        this.acceuilFrame.add(fileLabel, new GridBagConstraints(0, 2, 2, 1, 1, 1, GridBagConstraints.CENTER,
                 GridBagConstraints.NONE, new Insets(15, 5, 0, 5), 0, 0));
         this.acceuilFrame.add(sendUserButton, new GridBagConstraints(0, 3, 1, 1, 1, 1, GridBagConstraints.WEST,
                 GridBagConstraints.BOTH, new Insets(5, 5, 5, 5), 0, 0));

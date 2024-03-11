@@ -15,6 +15,7 @@ import main.java.com.ubo.tp.message.core.directory.IWatchableDirectory;
 import main.java.com.ubo.tp.message.core.directory.WatchableDirectory;
 import main.java.com.ubo.tp.message.datamodel.Message;
 import main.java.com.ubo.tp.message.datamodel.User;
+import main.java.com.ubo.tp.message.ihm.abonneComponent.AbonneControleur;
 import main.java.com.ubo.tp.message.ihm.loginComponent.SigninControlleur;
 import main.java.com.ubo.tp.message.ihm.loginComponent.SigninVue;
 import main.java.com.ubo.tp.message.ihm.messageComponent.MessageControleur;
@@ -54,6 +55,8 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 	private RechercheControlleur rechercheControlleur ;
 
 	private ProfilControlleur profilControlleur;
+
+	private AbonneControleur abonneControleur ;
 
 
 	/**
@@ -232,6 +235,8 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 			this.initGui();
 		}
 		this.message = addedMessage;
+		if(messageMainView == null)
+			messageMainView = new MessageMainView(messageControleur, this.user, this.message);
 		messageMainView.addMessage(message);
 		List<JPanel> panels = new ArrayList<>();
 		panels.add(rechercheView.getContentPane());
@@ -268,7 +273,10 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 			messageControleur = new MessageControleur(this.mDatabase, this.mEntityManager, addedUser);
 		}
 		this.user = addedUser;
+		this.abonneControleur = new AbonneControleur(this.mDatabase,this.user);
 	//	messageControleur = new MessageControleur(this.mDatabase, this.mEntityManager, this.user);
+		//	messageMainView = new MessageMainView(messageControleur, this.user, this.message);
+
 	}
 
 	@Override
