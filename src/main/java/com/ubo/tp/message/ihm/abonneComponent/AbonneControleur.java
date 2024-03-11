@@ -40,6 +40,7 @@ public class AbonneControleur implements IAbonneObserver {
                 if(user.getName().equals(name)){
                     if(!this.user.getUserTag().equals(tag))
                         this.user.addFollowing(tag);
+                        mDatabase.modifiyUser(this.user);
                 }
             }
         }

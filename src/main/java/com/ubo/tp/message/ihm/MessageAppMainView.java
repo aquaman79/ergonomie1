@@ -34,7 +34,7 @@ public class MessageAppMainView {
     protected Box vBox;
 
     protected Box vBoxProfil;
-
+    protected Box vBoxAbonnes;
 
     protected JFrame acceuilFrame;
 
@@ -139,13 +139,17 @@ public class MessageAppMainView {
         this.mFrame = new JFrame("MessageApp");
         hBox = Box.createHorizontalBox();
         vBox = Box.createVerticalBox();
+        vBoxAbonnes = Box.createVerticalBox();
         vBoxProfil = Box.createVerticalBox();
         vBoxProfil.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
+        vBoxAbonnes.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
         vBoxProfil.setBackground(Color.GRAY);
         Dimension preferredSize = new Dimension(200, 20);
         vBoxProfil.setPreferredSize(preferredSize);
+        vBoxAbonnes.setPreferredSize(preferredSize);
         hBox.add(vBoxProfil);
         hBox.add(vBox);
+        hBox.add(vBoxAbonnes);
 
         mFrame.getContentPane().add(hBox);
         ImageIcon icon = new ImageIcon(MessageAppMainView.class.getClassLoader().getResource("logo_20.png"));
@@ -468,9 +472,18 @@ public class MessageAppMainView {
         panel.setBackground(Color.GRAY);
         Dimension preferredSize = new Dimension(100, 20);
         panel.setPreferredSize(preferredSize);*/
+        vBoxProfil.removeAll();
 
         for(JPanel panel: panels) {
             vBoxProfil.add(panel);
+        }
+    }
+
+    public void addAbonnesBlock(List<JPanel> panels) {
+        vBoxAbonnes.removeAll();
+        vBoxAbonnes.add(new JLabel("Mes abonnés : "));
+        for(JPanel panel: panels) {
+            vBoxAbonnes.add(panel);
         }
     }
 
