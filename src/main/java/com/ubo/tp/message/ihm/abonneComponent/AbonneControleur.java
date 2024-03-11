@@ -54,6 +54,7 @@ public class AbonneControleur implements IAbonneObserver {
                     for(String tags : this.user.getFollows()){
                         if(tags.equals(tag)){
                             this.user.removeFollowing(tag);
+                            mDatabase.modifiyUser(this.user);
                         }
                     }
                 }
