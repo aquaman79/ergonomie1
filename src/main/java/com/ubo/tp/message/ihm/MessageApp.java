@@ -273,8 +273,23 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 			mMainView.changeCotent(panels);
 			System.out.println("User added");
 			messageControleur = new MessageControleur(this.mDatabase, this.mEntityManager, addedUser);
+		} else {
+			if(profilView != null) {
+				abonneControleur = new AbonneControleur();
+				abonneListView = new AbonneListView(abonneControleur);
+				abonneListView.initGUI();
+				Set<User> utilisateurs = mDatabase.getUsers().stream().filter(u -> u.getUserTag() != this.user.getUserTag()).collect(Collectors.toSet());
+				abonneListView.addAbonnes(utilisateurs, user);
+				List<JPanel> panelsProfil = new ArrayList<>();
+				panelsProfil.add(profilView.getContentPane());
+				panelsProfil.add(abonneListView.getContentPane());
+				mMainView.addProfilBlock(panelsProfil);
+				mMainView.refresh();
+
+			}
 		}
-		this.user = addedUser;
+
+		//this.user = addedUser;
 	//	messageControleur = new MessageControleur(this.mDatabase, this.mEntityManager, this.user);
 	}
 
