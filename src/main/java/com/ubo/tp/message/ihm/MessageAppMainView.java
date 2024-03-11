@@ -261,9 +261,6 @@ public class MessageAppMainView {
         if (mFrame == null) {
             this.initGUI();
         }
-        if(acceuilFrame ==null){
-            this.initAcceuil();
-        }
 
         // Affichage dans l'EDT
         SwingUtilities.invokeLater(new Runnable() {
@@ -280,16 +277,25 @@ public class MessageAppMainView {
 
                 MessageAppMainView.this.mFrame.pack();
 
+                if(acceuilFrame ==null){
+                    MessageAppMainView.this.initAcceuil();
+                }
 
                 JFrame frame2 = MessageAppMainView.this.acceuilFrame;
                 frame2.setLocation((screenSize.width - frame.getWidth()) / 6,
                         (screenSize.height - frame.getHeight()) / 4);
                 // Affichage
                 MessageAppMainView.this.acceuilFrame.setVisible(true);
-
-                MessageAppMainView.this.acceuilFrame.pack();
             }
         });
+    }
+
+    public void showAccueil() {
+        if(acceuilFrame ==null){
+            this.initAcceuil();
+        }
+
+        MessageAppMainView.this.acceuilFrame.pack();
     }
 
     /**

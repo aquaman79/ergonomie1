@@ -108,6 +108,7 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 	 */
 	public MessageApp(IDatabase database, EntityManager entityManager) {
 		this.mDatabase = database;
+		this.mDatabase.addObserver(this);
 		this.mEntityManager = entityManager;
 		signupControlleur = new SignupControlleur(database, entityManager);
 		this.session = new Session();
@@ -116,6 +117,7 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 		messageControleur = new MessageControleur(this.mDatabase, this.mEntityManager, this.user);
 		rechercheControlleur = new RechercheControlleur(this.mDatabase);
 		profilControlleur = new ProfilControlleur();
+		user = null;
 
 	//	this.mDatabase.addObserver(this);
 	}
@@ -208,12 +210,20 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 		if (mMainView == null) {
 			this.initGui();
 		}
-		this.initGui();
+		//this.initGui();
 		mMainView.showGUI();
 		//loginControlleur.show();
 
 		//	signupControlleur.show();
 		//	signinControlleur.show();
+	}
+
+	public void showAccueil() {
+		if (mMainView == null) {
+			this.initGui();
+		}
+		//this.initGui();
+		mMainView.showAccueil();
 	}
 
 	//database interfce
@@ -244,16 +254,20 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 
 	@Override
 	public void notifyUserAdded(User addedUser) {
-		if (mMainView == null) {
-			this.initGui();
+		if(user == null) {
+
+			if (mMainView == null) {
+				this.initGui();
+			}
+			this.user = addedUser;
+			SigninVue signinVue = new SigninVue(signinControlleur);
+			signinVue.initGUI();
+			List<JPanel> panels = new ArrayList<>();
+			panels.add(signinVue.getContentPane());
+			mMainView.changeCotent(panels);
+			System.out.println("User added");
 		}
-		this.user = addedUser;
-		SigninVue signinVue = new SigninVue(signinControlleur);
-		signinVue.initGUI();
-		List<JPanel> panels = new ArrayList<>();
-		panels.add(signinVue.getContentPane());
-		mMainView.changeCotent(panels);
-		System.out.println("User added");
+
 	}
 
 	@Override

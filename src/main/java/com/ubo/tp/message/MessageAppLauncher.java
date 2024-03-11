@@ -39,10 +39,12 @@ public class MessageAppLauncher {
 
 		MessageApp messageApp = new MessageApp(database, entityManager);
 
-		database.addObserver(messageApp);
+		//database.addObserver(messageApp);
 		//iSession.addObserver(messageApp);
 
 		messageApp.init();
+
+		messageApp.showAccueil();
 
 		messageApp.show();
 		///ISession iSession= new Session();
