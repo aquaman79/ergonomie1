@@ -114,12 +114,11 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 		this.session = new Session();
 		this.session.addObserver(this);
 		signinControlleur = new SigninControlleur(database, entityManager, this.session);
-		messageControleur = new MessageControleur(this.mDatabase, this.mEntityManager, this.user);
 		rechercheControlleur = new RechercheControlleur(this.mDatabase);
 		profilControlleur = new ProfilControlleur();
 		user = null;
 
-	//	this.mDatabase.addObserver(this);
+		//	this.mDatabase.addObserver(this);
 	}
 
 	/**
@@ -266,8 +265,10 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 			panels.add(signinVue.getContentPane());
 			mMainView.changeCotent(panels);
 			System.out.println("User added");
+			messageControleur = new MessageControleur(this.mDatabase, this.mEntityManager, addedUser);
 		}
-
+		this.user = addedUser;
+	//	messageControleur = new MessageControleur(this.mDatabase, this.mEntityManager, this.user);
 	}
 
 	@Override

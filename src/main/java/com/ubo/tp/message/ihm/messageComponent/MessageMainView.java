@@ -45,7 +45,7 @@ public class MessageMainView {
 
     public void addMessage(Message message) {
         MessageView messageView = new MessageView();
-        messageView.initGUI(user.getName(), message.getText(), LocalTime.now().toString());
+        messageView.initGUI(message.getSender().getName(), message.getText(), LocalTime.now().toString());
 
         vBoxMessages.add(messageView.getContentPane());
     }
