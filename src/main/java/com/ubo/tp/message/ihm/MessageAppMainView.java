@@ -339,11 +339,9 @@ public class MessageAppMainView {
      * Ajoute un message fictif à la base de données.
      */
     protected void addMessageInDatabase() {
-        // Création 'un message fictif
-        Message newMessage = this.generateMessage();
-
-        // Ajout du message
-        this.mDatabase.addMessage(newMessage);
+        MessageApp messageApp = new MessageApp(this.mDatabase,this.mEntityManager);
+        messageApp.init();
+        messageApp.show();
     }
 
     /**
