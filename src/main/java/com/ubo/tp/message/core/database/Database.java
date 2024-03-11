@@ -274,15 +274,57 @@ public class Database implements IDatabase {
 
 	public Set<Message> getMessagesContainingText(String text) {
 		Set<Message> filteredMessages = new HashSet<>();
-		for (Message message : this.getMessages()) {
-			if (message.getText().contains(text)) {
-				filteredMessages.add(message);
+		if (text.contains("@")) {
+			// Extrait le nom d'utilisateur après '@'
+			String userName = text.substring(text.indexOf("@") + 1);
+			for (Message message : this.getMessages()) {
+				User user = findUserByName(userName); // Méthode hypothétique pour trouver un utilisateur par son nom
+				if (user != null ) {
+					filteredMessages.add(message);
+				}
+			}
+		} else if (text.contains("#")) {
+			// Traite les messages contenant le tag
+			String userTag = text.substring(text.indexOf("#") + 1);
+			for (Message message : this.getMessages()) {
+				User user = findUserByTag(userTag); // Méthode hypothétique pour trouver un utilisateur par son tag
+				if (user != null) {
+					filteredMessages.add(message);
+				}
+			}
+		} else {
+			// Logique existante pour filtrer les messages contenant le texte
+			for (Message message : this.getMessages()) {
+				if (message.getText().contains(text)) {
+					filteredMessages.add(message);
+				}
 			}
 		}
-		for (IDatabaseObserver observer : mObservers) {
-				observer.notifyMessageFiltred(filteredMessages);
 
+		// Notification des observateurs
+		for (IDatabaseObserver observer : mObservers) {
+			observer.notifyMessageFiltred(filteredMessages);
 		}
 		return filteredMessages;
 	}
+
+	// Vous devriez implémenter cette méthode pour trouver un utilisateur par son nom.
+	private User findUserByName(String name) {
+		for (User user : mUsers) {
+			if (user.getName().equals(name)) {
+				return user;
+			}
+		}
+		return null;
+	}
+
+	private User findUserByTag(String tag) {
+		for (User user : mUsers) {
+			if (user.getUserTag().equals(tag)) {
+				return user;
+			}
+		}
+		return null;
+	}
+
 }

@@ -197,6 +197,7 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 		if (mMainView == null) {
 			this.initGui();
 		}
+		this.initGui();
 		mMainView.showGUI();
 		//loginControlleur.show();
 

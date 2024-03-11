@@ -9,6 +9,7 @@ import main.java.com.ubo.tp.message.ihm.loginComponent.SigninControlleur;
 import main.java.com.ubo.tp.message.ihm.loginComponent.SigninVue;
 import main.java.com.ubo.tp.message.ihm.signupComponent.SignupControlleur;
 import main.java.com.ubo.tp.message.ihm.signupComponent.SignupView;
+import mock.MessageAppMock;
 
 import javax.swing.*;
 import java.awt.*;
@@ -30,6 +31,8 @@ public class MessageAppMainView {
     protected JFrame mFrame;
 
 
+    protected JFrame acceuilFrame;
+
     /**
      * Base de donénes de l'application.
      */
@@ -49,10 +52,85 @@ public class MessageAppMainView {
 
     }
 
+    protected  void initAcceuil(){
+        acceuilFrame = new JFrame("Université bretagne occidentale");
+        acceuilFrame.setLayout(new GridBagLayout());
+
+
+
+        //
+        // Gestion de la base de données
+
+        JLabel dbLabel = new JLabel("Database");
+
+        Button addUserButton = new Button("Add User");
+        addUserButton.setPreferredSize(new Dimension(100, 50));
+        addUserButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                MessageAppMainView.this.addUserInDatabase();
+            }
+        });
+
+        Button addMessageButton = new Button("Add Message");
+        addMessageButton.setPreferredSize(new Dimension(100, 50));
+        addMessageButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                MessageAppMainView.this.addMessageInDatabase();
+            }
+        });
+
+        //
+        // Gestion des fichiers
+
+        JLabel fileLabel = new JLabel("Files");
+
+        Button sendUserButton = new Button("Write User");
+        sendUserButton.setPreferredSize(new Dimension(100, 50));
+        sendUserButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                MessageAppMainView.this.writeUser();
+            }
+        });
+
+        Button sendMessageButton = new Button("Write Message");
+        sendMessageButton.setPreferredSize(new Dimension(100, 50));
+        sendMessageButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                MessageAppMainView.this.writeMessage();
+            }
+        });
+
+        //
+        // Ajout des composants à la fenêtre
+        this.acceuilFrame.add(dbLabel, new GridBagConstraints(0, 0, 2, 1, 1, 1, GridBagConstraints.CENTER,
+                GridBagConstraints.NONE, new Insets(5, 5, 0, 5), 0, 0));
+        this.acceuilFrame.add(addUserButton, new GridBagConstraints(0, 1, 1, 1, 1, 1, GridBagConstraints.WEST,
+                GridBagConstraints.BOTH, new Insets(5, 5, 5, 5), 0, 0));
+        this.acceuilFrame.add(addMessageButton, new GridBagConstraints(1, 1, 1, 1, 1, 1, GridBagConstraints.EAST,
+                GridBagConstraints.BOTH, new Insets(5, 5, 5, 5), 0, 0));
+      /*  this.acceuilFrame.add(fileLabel, new GridBagConstraints(0, 2, 2, 1, 1, 1, GridBagConstraints.CENTER,
+                GridBagConstraints.NONE, new Insets(15, 5, 0, 5), 0, 0));
+        this.acceuilFrame.add(sendUserButton, new GridBagConstraints(0, 3, 1, 1, 1, 1, GridBagConstraints.WEST,
+                GridBagConstraints.BOTH, new Insets(5, 5, 5, 5), 0, 0));
+        this.acceuilFrame.add(sendMessageButton, new GridBagConstraints(1, 3, 1, 1, 1, 1, GridBagConstraints.EAST,
+                GridBagConstraints.BOTH, new Insets(5, 5, 5, 5), 0, 0));*/
+
+
+    }
+
     /**
      * Initialisation de l'IHM
      */
     protected void initGUI() {
+
         this.mFrame = new JFrame("MessageApp");
         ImageIcon icon = new ImageIcon(MessageAppMainView.class.getClassLoader().getResource("logo_20.png"));
         mFrame.setIconImage(icon.getImage());
@@ -158,7 +236,7 @@ public class MessageAppMainView {
         menu.add(aproposItem);
 
         mFrame.setJMenuBar(menu);
-
+        mFrame.setVisible(true);
         //
         // Gestion de la base de données
 
@@ -171,6 +249,9 @@ public class MessageAppMainView {
         // Init auto de l'IHM au cas ou ;)
         if (mFrame == null) {
             this.initGUI();
+        }
+        if(acceuilFrame ==null){
+            this.initAcceuil();
         }
 
         // Affichage dans l'EDT
@@ -187,6 +268,15 @@ public class MessageAppMainView {
                 MessageAppMainView.this.mFrame.setVisible(true);
 
                 MessageAppMainView.this.mFrame.pack();
+
+
+                JFrame frame2 = MessageAppMainView.this.acceuilFrame;
+                frame2.setLocation((screenSize.width - frame.getWidth()) / 6,
+                        (screenSize.height - frame.getHeight()) / 4);
+                // Affichage
+                MessageAppMainView.this.acceuilFrame.setVisible(true);
+
+                MessageAppMainView.this.acceuilFrame.pack();
             }
         });
     }
@@ -196,10 +286,11 @@ public class MessageAppMainView {
      */
     protected void addUserInDatabase() {
         // Création d'un utilisateur fictif
-        User newUser = this.generateUser();
-
+        this.initGUI();
+      //  User newUser = this.generateUser();
+      //  this.initGUI();
         // Ajout de l'utilisateur à la base
-        this.mDatabase.addUser(newUser);
+      //  this.mDatabase.addUser(newUser);
     }
 
     /**
