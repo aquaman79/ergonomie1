@@ -1,9 +1,7 @@
-package main.java.com.ubo.tp.message.ihm.abonneComponent;
+package main.java.com.ubo.tp.message.ihm.utilisateurComponent;
 
 import main.java.com.ubo.tp.message.core.EntityManager;
 import main.java.com.ubo.tp.message.core.database.IDatabase;
-import main.java.com.ubo.tp.message.core.database.IDatabaseObserver;
-import main.java.com.ubo.tp.message.datamodel.Message;
 import main.java.com.ubo.tp.message.datamodel.User;
 import main.java.com.ubo.tp.message.ihm.messageComponent.MessageControleur;
 import main.java.com.ubo.tp.message.ihm.messageComponent.MessageMainView;
@@ -11,7 +9,7 @@ import main.java.com.ubo.tp.message.ihm.rechercheComponent.RechercheView;
 
 import javax.swing.*;
 
-public class AbonneControleur implements IAbonneObserver {
+public class UtilisateurControleur implements IUtilisateurObserver {
 
     protected IDatabase mDatabase;
 
@@ -28,7 +26,7 @@ public class AbonneControleur implements IAbonneObserver {
 
     MessageControleur messageControleur ;
 
-    public AbonneControleur(IDatabase database,User user, MessageControleur messageControleur ) {
+    public UtilisateurControleur(IDatabase database, User user, MessageControleur messageControleur ) {
         this.mDatabase = database;
         this.user  = user ;
         this.messageControleur = messageControleur ;

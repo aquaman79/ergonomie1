@@ -1,14 +1,14 @@
-package main.java.com.ubo.tp.message.ihm.abonneComponent;
+package main.java.com.ubo.tp.message.ihm.utilisateurComponent;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class AbonneView {
+public class UtilisateurView {
     private JPanel contentPane;
 
-    private IAbonneObserver abonneObserver;
+    private IUtilisateurObserver abonneObserver;
 
     private Box vBox;
 
@@ -18,7 +18,7 @@ public class AbonneView {
 
     private  JButton btDesabonner;
 
-    public AbonneView(IAbonneObserver abonneObserver) {
+    public UtilisateurView(IUtilisateurObserver abonneObserver) {
         this.abonneObserver = abonneObserver;
     }
 
@@ -28,7 +28,7 @@ public class AbonneView {
         hBox = Box.createHorizontalBox();
 
         JLabel nomLabel = new JLabel(username);
-        JLabel tagLabel = new JLabel(tag);
+        JLabel tagLabel = new JLabel("@"+ tag);
         btAbonner = new JButton("S'abonner");
         btDesabonner = new JButton("Se désabonner");
 

@@ -13,10 +13,10 @@ import main.java.com.ubo.tp.message.core.directory.IWatchableDirectory;
 import main.java.com.ubo.tp.message.core.directory.WatchableDirectory;
 import main.java.com.ubo.tp.message.datamodel.Message;
 import main.java.com.ubo.tp.message.datamodel.User;
-import main.java.com.ubo.tp.message.ihm.abonneComponent.AbonneControleur;
+import main.java.com.ubo.tp.message.ihm.utilisateurComponent.UtilisateurControleur;
 
-import main.java.com.ubo.tp.message.ihm.abonneComponent.AbonneListView;
-import main.java.com.ubo.tp.message.ihm.abonneComponent.FollowerView;
+import main.java.com.ubo.tp.message.ihm.utilisateurComponent.UtilisateurListView;
+import main.java.com.ubo.tp.message.ihm.utilisateurComponent.FollowerView;
 import main.java.com.ubo.tp.message.ihm.loginComponent.SigninControlleur;
 import main.java.com.ubo.tp.message.ihm.loginComponent.SigninVue;
 import main.java.com.ubo.tp.message.ihm.messageComponent.MessageControleur;
@@ -56,7 +56,7 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 	private ProfilControlleur profilControlleur;
 
 
-	private AbonneControleur abonneControleur;
+	private UtilisateurControleur utilisateurControleur;
 
 
 	/**
@@ -95,7 +95,7 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 
 	private ProfilView profilView;
 
-	private AbonneListView abonneListView;
+	private UtilisateurListView utilisateurListView;
 
 	public SigninControlleur getLoginControlleur() {
 		return signinControlleur;
@@ -276,18 +276,18 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 			mMainView.changeCotent(panels);
 			System.out.println("User added");
 			messageControleur = new MessageControleur(this.mDatabase, this.mEntityManager, addedUser,messageMainView);
-			abonneControleur = new AbonneControleur(this.mDatabase,this.user,this.messageControleur);
-			abonneListView = new AbonneListView(abonneControleur);
+			utilisateurControleur = new UtilisateurControleur(this.mDatabase,this.user,this.messageControleur);
+			utilisateurListView = new UtilisateurListView(utilisateurControleur);
 		} else {
 			if(profilView != null) {
-			abonneControleur = new AbonneControleur(this.mDatabase,this.user,this.messageControleur);
-				abonneListView = new AbonneListView(abonneControleur);
-				abonneListView.initGUI();
+			utilisateurControleur = new UtilisateurControleur(this.mDatabase,this.user,this.messageControleur);
+				utilisateurListView = new UtilisateurListView(utilisateurControleur);
+				utilisateurListView.initGUI();
 				Set<User> utilisateurs = mDatabase.getUsers().stream().filter(u -> u.getUserTag() != this.user.getUserTag()).collect(Collectors.toSet());
-				abonneListView.addAbonnes(utilisateurs, user);
+				utilisateurListView.addAbonnes(utilisateurs, user);
 				List<JPanel> panelsProfil = new ArrayList<>();
 				panelsProfil.add(profilView.getContentPane());
-				panelsProfil.add(abonneListView.getContentPane());
+				panelsProfil.add(utilisateurListView.getContentPane());
 				mMainView.addProfilBlock(panelsProfil);
 				mMainView.refresh();
 
@@ -307,16 +307,16 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 		profilView.initGUI(this.user);
 
 //        abonneControleur = new AbonneControleur();
-		abonneListView = new AbonneListView(abonneControleur);
-		abonneListView.initGUI();
+		utilisateurListView = new UtilisateurListView(utilisateurControleur);
+		utilisateurListView.initGUI();
 		Set<User> utilisateurs = mDatabase.getUsers().stream().filter(u -> u.getUserTag() != this.user.getUserTag()).collect(Collectors.toSet());
-		abonneListView.addAbonnes(utilisateurs, user);
+		utilisateurListView.addAbonnes(utilisateurs, user);
 
 		messageMainView.viewMessageFiltre(mDatabase.getMessages());
 
 		List<JPanel> panelsProfil = new ArrayList<>();
 		panelsProfil.add(profilView.getContentPane());
-		panelsProfil.add(abonneListView.getContentPane());
+		panelsProfil.add(utilisateurListView.getContentPane());
 
 		List<JPanel> panelsAbonnes = new ArrayList<>();
 
@@ -359,10 +359,10 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 		profilView.initGUI(connectedUser);
 
 //		abonneControleur = new AbonneControleur();
-		abonneListView = new AbonneListView(abonneControleur);
-		abonneListView.initGUI();
+		utilisateurListView = new UtilisateurListView(utilisateurControleur);
+		utilisateurListView.initGUI();
 		Set<User> utilisateurs = mDatabase.getUsers().stream().filter(u -> u.getUserTag() != this.user.getUserTag()).collect(Collectors.toSet());
-		abonneListView.addAbonnes(utilisateurs, user);
+		utilisateurListView.addAbonnes(utilisateurs, user);
 
 
 		rechercheView = new RechercheView(rechercheControlleur);
@@ -371,7 +371,7 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 		messageMainView = new MessageMainView(messageControleur, this.user, this.message);
 
 		messageMainView.initGUI();
-		abonneControleur = new AbonneControleur(this.mDatabase,this.user,messageControleur);
+		utilisateurControleur = new UtilisateurControleur(this.mDatabase,this.user,messageControleur);
 
 
 		List<JPanel> panels = new ArrayList<>();
@@ -380,7 +380,7 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 
 		List<JPanel> panelsProfil = new ArrayList<>();
 		panelsProfil.add(profilView.getContentPane());
-		panelsProfil.add(abonneListView.getContentPane());
+		panelsProfil.add(utilisateurListView.getContentPane());
 
 		List<JPanel> panelsAbonnes = new ArrayList<>();
 

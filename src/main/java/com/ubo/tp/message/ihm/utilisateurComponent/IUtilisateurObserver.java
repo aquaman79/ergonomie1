@@ -1,6 +1,6 @@
-package main.java.com.ubo.tp.message.ihm.abonneComponent;
+package main.java.com.ubo.tp.message.ihm.utilisateurComponent;
 
-public interface IAbonneObserver {
+public interface IUtilisateurObserver {
     public void saveFollewer(String name, String tag);
     public void removeFollewer(String name, String tag);
 

@@ -1,4 +1,4 @@
-package main.java.com.ubo.tp.message.ihm.abonneComponent;
+package main.java.com.ubo.tp.message.ihm.utilisateurComponent;
 
 import javax.swing.*;
 import java.awt.*;
