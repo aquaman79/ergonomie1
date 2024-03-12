@@ -23,7 +23,7 @@ public class ProfilView {
         JLabel titre = new JLabel("PROFIL : ");
 
         JLabel nom = new JLabel(user.getName());
-        JLabel tag = new JLabel("@" + user.getUserTag());
+        JLabel tag = new JLabel("#" + user.getUserTag());
 
         vBox.add(titre);
         vBox.add(nom);

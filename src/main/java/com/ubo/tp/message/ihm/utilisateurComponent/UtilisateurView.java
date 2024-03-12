@@ -28,7 +28,7 @@ public class UtilisateurView {
         hBox = Box.createHorizontalBox();
 
         JLabel nomLabel = new JLabel(username);
-        JLabel tagLabel = new JLabel("@"+ tag);
+        JLabel tagLabel = new JLabel("#"+ tag);
         btAbonner = new JButton("S'abonner");
         btDesabonner = new JButton("Se désabonner");
 
