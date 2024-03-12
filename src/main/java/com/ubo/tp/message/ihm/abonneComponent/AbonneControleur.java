@@ -22,8 +22,7 @@ public class AbonneControleur implements IAbonneObserver {
 
     public AbonneControleur(IDatabase database,User user ) {
         this.mDatabase = database;
-        this.user  =user ;
-
+        this.user  = user ;
     }
 
     protected void initLookAndFeel() {
@@ -34,13 +33,31 @@ public class AbonneControleur implements IAbonneObserver {
         }
     }
 
+    @Override
     public void saveFollewer(String name, String tag){
         for(User user : this.mDatabase.getUsers()){
             if(user.getUserTag().equals(tag)){
                 if(user.getName().equals(name)){
-                    this.user.addFollowing(tag);
+                    if(!this.user.getUserTag().equals(tag))
+                        this.user.addFollowing(tag);
                 }
             }
         }
     }
+
+    @Override
+    public void removeFollewer(String name, String tag){
+        for(User user : this.mDatabase.getUsers()){
+            if(user.getUserTag().equals(tag)){
+                if(user.getName().equals(name)){
+                    for(String tags : this.user.getFollows()){
+                        if(tags.equals(tag)){
+                            this.user.removeFollowing(tag);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 }

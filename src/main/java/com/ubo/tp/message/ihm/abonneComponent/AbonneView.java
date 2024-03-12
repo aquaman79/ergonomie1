@@ -22,7 +22,8 @@ public class AbonneView {
         this.abonneObserver = abonneObserver;
     }
 
-    public void initGUI(String username, String tag, boolean estSuivi) {
+    public void initGUI(String username, String tag, boolean estSuiviInit) {
+        final boolean[] estSuivi = {estSuiviInit};
         contentPane = new JPanel(new BorderLayout());
         vBox = Box.createVerticalBox();
         hBox = Box.createHorizontalBox();
@@ -35,17 +36,33 @@ public class AbonneView {
         vBox.add(nomLabel);
         vBox.add(tagLabel);
         hBox.add(vBox);
-        hBox.add(estSuivi ? btDesabonner : btAbonner);
+        hBox.add(estSuivi[0] ? btDesabonner : btAbonner);
 
         btAbonner.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                estSuivi[0] = !estSuivi[0]; // Inverse l'état d'abonnement
+                btAbonner.setText(estSuivi[0] ? "S'abonner" : "Se désabonner");
+                if(btAbonner.getText().contains("S'abonner")){
+                    abonneObserver.saveFollewer(username,tag);
+                    System.out.println("s'abonner");
+                } else{
+                    if(btAbonner.getText().contains("Se désabonner")){
+                        abonneObserver.removeFollewer(username,tag);
+                        System.out.println("Desabonner");
+                    }
+                }
             }
+
         });
 
         btDesabonner.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                System.out.println("okdoki");
+                abonneObserver.saveFollewer(username,tag);
+
+
             }
         });
 

@@ -475,8 +475,7 @@ public class MessageAppMainView {
     }
 
 
-    public void addComponentAsFirst(JPanel panel) {
-        mFrame.getContentPane().add(panel, 0);
+    public void refresh() {
         mFrame.revalidate();
         mFrame.repaint();
     }
