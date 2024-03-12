@@ -1,14 +1,11 @@
 package main.java.com.ubo.tp.message.ihm;
 
 import java.io.File;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import main.java.com.ubo.tp.message.IMessageAppObserver;
 import main.java.com.ubo.tp.message.core.EntityManager;
 import main.java.com.ubo.tp.message.core.database.IDatabase;
 import main.java.com.ubo.tp.message.core.database.IDatabaseObserver;
@@ -22,9 +19,7 @@ import main.java.com.ubo.tp.message.ihm.abonneComponent.AbonneListView;
 import main.java.com.ubo.tp.message.ihm.loginComponent.SigninControlleur;
 import main.java.com.ubo.tp.message.ihm.loginComponent.SigninVue;
 import main.java.com.ubo.tp.message.ihm.messageComponent.MessageControleur;
-import main.java.com.ubo.tp.message.ihm.messageComponent.MessageInputView;
 import main.java.com.ubo.tp.message.ihm.messageComponent.MessageMainView;
-import main.java.com.ubo.tp.message.ihm.messageComponent.MessageView;
 import main.java.com.ubo.tp.message.ihm.profilComponent.ProfilControlleur;
 import main.java.com.ubo.tp.message.ihm.profilComponent.ProfilView;
 import main.java.com.ubo.tp.message.ihm.rechercheComponent.RechercheControlleur;

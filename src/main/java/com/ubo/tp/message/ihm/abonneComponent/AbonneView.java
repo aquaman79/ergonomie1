@@ -53,7 +53,6 @@ public class AbonneView {
                     }
                 }
             }
-
         });
 
         btDesabonner.addActionListener(new ActionListener() {

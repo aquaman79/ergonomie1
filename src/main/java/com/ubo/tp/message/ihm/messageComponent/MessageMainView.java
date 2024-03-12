@@ -43,14 +43,23 @@ public class MessageMainView {
 
     public void addMessage(Message message) {
         MessageView messageView = new MessageView();
-        messageView.initGUI(message.getSender().getName(), message.getText(), LocalTime.now().toString());
-
-        vBoxMessages.add(messageView.getContentPane());
+        for(String tags : this.user.getFollows()){
+                if(tags.equals(message.getSender().getUserTag()) ){
+                    messageView.initGUI(message.getSender().getName(), message.getText(), LocalTime.now().toString());
+                    vBoxMessages.add(messageView.getContentPane());;
+                }
+        }
+        if( this.user.getUserTag().equals(message.getSender().getUserTag())) {
+            messageView.initGUI(message.getSender().getName(), message.getText(), LocalTime.now().toString());
+            vBoxMessages.add(messageView.getContentPane());
+            ;
+        }
     }
 
     public void viewMessageFiltre(Set<Message> messages){
         this.vBoxMessages.removeAll();
-        for(Message message1 : messages){
+
+       for(Message message1 : messages){
             this.addMessage(message1);
         }
     }
