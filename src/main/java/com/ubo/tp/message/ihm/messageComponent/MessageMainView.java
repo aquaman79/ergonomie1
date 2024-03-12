@@ -6,7 +6,8 @@ import main.java.com.ubo.tp.message.datamodel.User;
 import javax.swing.*;
 import java.awt.*;
 import java.time.LocalTime;
-import java.util.Set;
+import java.util.*;
+import java.util.List;
 
 public class MessageMainView {
     private Message message;
@@ -18,10 +19,13 @@ public class MessageMainView {
     private Box vBoxMessages;
     MessageObserver messageObserver;
 
+    Set<Message> messageSet ;
+
     public MessageMainView(MessageObserver messageObserver, User user, Message message) {
         this.messageObserver = messageObserver;
         this.user = user;
         this.message = message;
+        this.messageSet = new HashSet<>() ;
     }
 
     public JPanel getContentPane() {
@@ -43,6 +47,7 @@ public class MessageMainView {
 
     public void addMessage(Message message) {
         MessageView messageView = new MessageView();
+        this.messageSet.add(message);
         if (this.user != null)
         {
 
@@ -60,10 +65,15 @@ public class MessageMainView {
     }
 
     public void viewMessageFiltre(Set<Message> messages){
-        this.vBoxMessages.removeAll();
-
+        if(this.vBoxMessages != null)
+            this.vBoxMessages.removeAll();
        for(Message message1 : messages){
             this.addMessage(message1);
         }
+    }
+
+    public void rechargeMessage() {
+        viewMessageFiltre(this.messageSet);
+
     }
 }

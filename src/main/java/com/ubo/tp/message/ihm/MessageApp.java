@@ -121,6 +121,7 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 		rechercheControlleur = new RechercheControlleur(this.mDatabase);
 		profilControlleur = new ProfilControlleur();
 		user = null;
+		messageMainView = new MessageMainView(messageControleur, this.user, this.message);
 
 		//	this.mDatabase.addObserver(this);
 	}
@@ -236,8 +237,9 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 			this.initGui();
 		}
 		this.message = addedMessage;
-		if(messageMainView == null)
+		if(messageMainView == null) {
 			messageMainView = new MessageMainView(messageControleur, this.user, this.message);
+		}
 		messageMainView.addMessage(message);
 		List<JPanel> panels = new ArrayList<>();
 		if(rechercheView != null) {
@@ -274,11 +276,11 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 			mMainView.changeCotent(panels);
 			System.out.println("User added");
 			messageControleur = new MessageControleur(this.mDatabase, this.mEntityManager, addedUser);
-			abonneControleur = new AbonneControleur(this.mDatabase,this.user);
+			abonneControleur = new AbonneControleur(this.mDatabase,this.user,this.messageMainView);
 			abonneListView = new AbonneListView(abonneControleur);
 		} else {
 			if(profilView != null) {
-				abonneControleur = new AbonneControleur(this.mDatabase,this.user);
+			abonneControleur = new AbonneControleur(this.mDatabase,this.user,this.messageMainView);
 				abonneListView = new AbonneListView(abonneControleur);
 				abonneListView.initGUI();
 				Set<User> utilisateurs = mDatabase.getUsers().stream().filter(u -> u.getUserTag() != this.user.getUserTag()).collect(Collectors.toSet());
@@ -335,7 +337,10 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 		rechercheView.initGUI();
 
 		messageMainView = new MessageMainView(messageControleur, this.user, this.message);
+
 		messageMainView.initGUI();
+		abonneControleur = new AbonneControleur(this.mDatabase,this.user,messageMainView);
+
 
 		List<JPanel> panels = new ArrayList<>();
 		panels.add(rechercheView.getContentPane());

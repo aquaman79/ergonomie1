@@ -4,4 +4,6 @@ public interface IAbonneObserver {
     public void saveFollewer(String name, String tag);
     public void removeFollewer(String name, String tag);
 
+    public void rechargeMessage(String name, String tag );
+
 }
