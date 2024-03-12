@@ -16,6 +16,7 @@ import main.java.com.ubo.tp.message.datamodel.User;
 import main.java.com.ubo.tp.message.ihm.abonneComponent.AbonneControleur;
 
 import main.java.com.ubo.tp.message.ihm.abonneComponent.AbonneListView;
+import main.java.com.ubo.tp.message.ihm.abonneComponent.FollowerView;
 import main.java.com.ubo.tp.message.ihm.loginComponent.SigninControlleur;
 import main.java.com.ubo.tp.message.ihm.loginComponent.SigninVue;
 import main.java.com.ubo.tp.message.ihm.messageComponent.MessageControleur;
@@ -264,7 +265,6 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 	@Override
 	public void notifyUserAdded(User addedUser) {
 		if(user == null) {
-
 			if (mMainView == null) {
 				this.initGui();
 			}
@@ -302,7 +302,31 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 
 	@Override
 	public void notifyUserModified(User modifiedUser) {
-		System.out.println("User modified");
+
+		profilView = new ProfilView(profilControlleur);
+		profilView.initGUI(this.user);
+
+//		abonneControleur = new AbonneControleur();
+		abonneListView = new AbonneListView(abonneControleur);
+		abonneListView.initGUI();
+		Set<User> utilisateurs = mDatabase.getUsers().stream().filter(u -> u.getUserTag() != this.user.getUserTag()).collect(Collectors.toSet());
+		abonneListView.addAbonnes(utilisateurs, user);
+
+		List<JPanel> panelsProfil = new ArrayList<>();
+		panelsProfil.add(profilView.getContentPane());
+		panelsProfil.add(abonneListView.getContentPane());
+
+		List<JPanel> panelsAbonnes = new ArrayList<>();
+
+		for(User follower: mDatabase.getFollowers(this.user)) {
+			FollowerView followerView = new FollowerView();
+			followerView.initGUI(follower.getName(), follower.getUserTag());
+			panelsAbonnes.add(followerView.getContentPane());
+		}
+
+		mMainView.addProfilBlock(panelsProfil);
+		mMainView.addAbonnesBlock(panelsAbonnes);
+		mMainView.refresh();
 	}
 
 
@@ -349,7 +373,17 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 		List<JPanel> panelsProfil = new ArrayList<>();
 		panelsProfil.add(profilView.getContentPane());
 		panelsProfil.add(abonneListView.getContentPane());
+
+		List<JPanel> panelsAbonnes = new ArrayList<>();
+
+		for(User follower: mDatabase.getFollowers(this.user)) {
+			FollowerView followerView = new FollowerView();
+			followerView.initGUI(follower.getName(), follower.getUserTag());
+			panelsAbonnes.add(followerView.getContentPane());
+		}
+
 		mMainView.addProfilBlock(panelsProfil);
+		mMainView.addAbonnesBlock(panelsAbonnes);
 		mMainView.changeCotent(panels);
 	}
 

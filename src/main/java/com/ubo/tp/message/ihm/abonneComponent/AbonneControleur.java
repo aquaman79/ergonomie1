@@ -44,9 +44,12 @@ public class AbonneControleur implements IAbonneObserver {
                 if(user.getName().equals(name)){
                     if(!this.user.getUserTag().equals(tag)){
                         this.user.addFollowing(tag);
+
                         this.rechargeMessage(name,tag);
                     }
 
+
+                        mDatabase.modifiyUser(this.user);
 
                 }
             }
@@ -61,6 +64,7 @@ public class AbonneControleur implements IAbonneObserver {
                     for(String tags : this.user.getFollows()){
                         if(tags.equals(tag)){
                             this.user.removeFollowing(tag);
+                            mDatabase.modifiyUser(this.user);
                         }
                     }
                 }
