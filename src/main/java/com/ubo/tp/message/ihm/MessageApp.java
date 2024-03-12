@@ -237,8 +237,10 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 			this.initGui();
 		}
 		this.message = addedMessage;
-		if(messageMainView == null)
+		if(messageMainView == null) {
 			messageMainView = new MessageMainView(messageControleur, this.user, this.message);
+			messageMainView.initGUI();
+		}
 		messageMainView.addMessage(message);
 		List<JPanel> panels = new ArrayList<>();
 		if(rechercheView != null) {
@@ -266,6 +268,7 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 			if (mMainView == null) {
 				this.initGui();
 			}
+			//mes mDatabase.getMessages().stream().filter(m -> this.user.getFollows().contains(m.getSender().getUserTag())).collect(Collectors.toSet());
 			this.user = addedUser;
 			SigninVue signinVue = new SigninVue(signinControlleur);
 			signinVue.initGUI();
@@ -310,6 +313,8 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 		Set<User> utilisateurs = mDatabase.getUsers().stream().filter(u -> u.getUserTag() != this.user.getUserTag()).collect(Collectors.toSet());
 		abonneListView.addAbonnes(utilisateurs, user);
 
+		messageMainView.viewMessageFiltre(mDatabase.getMessages());
+
 		List<JPanel> panelsProfil = new ArrayList<>();
 		panelsProfil.add(profilView.getContentPane());
 		panelsProfil.add(abonneListView.getContentPane());
@@ -322,9 +327,14 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 			panelsAbonnes.add(followerView.getContentPane());
 		}
 
+		List<JPanel> panels = new ArrayList<>();
+		panels.add(rechercheView.getContentPane());
+		panels.add(messageMainView.getContentPane());
+
 		mMainView.addProfilBlock(panelsProfil);
 		mMainView.addAbonnesBlock(panelsAbonnes);
-		mMainView.refresh();
+		mMainView.changeCotent(panels);
+		//mMainView.refresh();
 	}
 
 
