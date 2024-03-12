@@ -2,7 +2,10 @@ package main.java.com.ubo.tp.message.ihm.abonneComponent;
 
 import main.java.com.ubo.tp.message.core.EntityManager;
 import main.java.com.ubo.tp.message.core.database.IDatabase;
+import main.java.com.ubo.tp.message.core.database.IDatabaseObserver;
+import main.java.com.ubo.tp.message.datamodel.Message;
 import main.java.com.ubo.tp.message.datamodel.User;
+import main.java.com.ubo.tp.message.ihm.messageComponent.MessageControleur;
 import main.java.com.ubo.tp.message.ihm.messageComponent.MessageMainView;
 import main.java.com.ubo.tp.message.ihm.rechercheComponent.RechercheView;
 
@@ -23,10 +26,12 @@ public class AbonneControleur implements IAbonneObserver {
 
     MessageMainView messageMainView ;
 
-    public AbonneControleur(IDatabase database,User user,MessageMainView messageMainView ) {
+    MessageControleur messageControleur ;
+
+    public AbonneControleur(IDatabase database,User user, MessageControleur messageControleur ) {
         this.mDatabase = database;
         this.user  = user ;
-        this.messageMainView = messageMainView;
+        this.messageControleur = messageControleur ;
     }
 
     protected void initLookAndFeel() {
@@ -44,13 +49,13 @@ public class AbonneControleur implements IAbonneObserver {
                 if(user.getName().equals(name)){
                     if(!this.user.getUserTag().equals(tag)){
                         this.user.addFollowing(tag);
-
-                        this.rechargeMessage(name,tag);
-                    }
-
-
                         mDatabase.modifiyUser(this.user);
+                        this.rechargeMessage(name,tag);
+                       // for(Message message : mDatabase.getMessages()){
+                         //   mDatabase.addMessage(message);
 
+                        //}
+                    }
                 }
             }
         }
@@ -65,6 +70,7 @@ public class AbonneControleur implements IAbonneObserver {
                         if(tags.equals(tag)){
                             this.user.removeFollowing(tag);
                             mDatabase.modifiyUser(this.user);
+
                         }
                     }
                 }
@@ -77,7 +83,7 @@ public class AbonneControleur implements IAbonneObserver {
         for(User user : this.mDatabase.getUsers()) {
             if (user.getUserTag().equals(tag)) {
                 if (user.getName().equals(name))
-                    this.messageMainView.rechargeMessage();
+                    this.messageControleur.rechargeMessage();
             }
             }
         }

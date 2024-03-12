@@ -45,35 +45,41 @@ public class MessageMainView {
         contentPane.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
     }
 
-    public void addMessage(Message message) {
+    public void addMessage( Message message) {
         MessageView messageView = new MessageView();
         this.messageSet.add(message);
-        if (this.user != null)
+
+        if (user != null)
         {
 
-        for(String tags : this.user.getFollows()){
+        for(String tags : user.getFollows()){
                 if(tags.equals(message.getSender().getUserTag()) ){
                     messageView.initGUI(message.getSender().getName(), message.getText(), LocalTime.now().toString());
                     vBoxMessages.add(messageView.getContentPane());;
                 }
         }
-        if( this.user.getUserTag().equals(message.getSender().getUserTag())) {
+        if( user.getUserTag().equals(message.getSender().getUserTag())) {
             messageView.initGUI(message.getSender().getName(), message.getText(), LocalTime.now().toString());
-            vBoxMessages.add(messageView.getContentPane());
+            if(vBoxMessages == null)
+                this.initGUI();
+            if(messageView!=null && vBoxMessages != null)
+                vBoxMessages.add(messageView.getContentPane());
         }
         }
     }
 
-    public void viewMessageFiltre(Set<Message> messages){
+    public void viewMessageFiltre(  Set<Message> messages){
+        if(vBoxMessages == null)
+            this.initGUI();
         if(this.vBoxMessages != null)
             this.vBoxMessages.removeAll();
        for(Message message1 : messages){
-            this.addMessage(message1);
+            this.addMessage(  message1);
         }
     }
 
-    public void rechargeMessage() {
-        viewMessageFiltre(this.messageSet);
+    public void rechargeMessage( Set<Message> messages) {
+        viewMessageFiltre( messages);
 
     }
 }
