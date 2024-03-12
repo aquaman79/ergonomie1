@@ -61,6 +61,8 @@ public class Database implements IDatabase {
 		}
 	}
 
+
+
 	@Override
 	public void removeMessage(Message messageToRemove) {
 		// Suppression du message

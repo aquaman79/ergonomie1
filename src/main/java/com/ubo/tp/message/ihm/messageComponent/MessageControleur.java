@@ -21,10 +21,13 @@ public class MessageControleur implements MessageObserver{
 
     private MessageView messageView;
 
-    public MessageControleur(IDatabase database, EntityManager entityManager,User user) {
+    private MessageMainView messageMainView ;
+
+    public MessageControleur(IDatabase database, EntityManager entityManager,User user,MessageMainView messageMainView) {
         this.mDatabase = database;
         this.mEntityManager = entityManager;
         this.user = user ;
+        this.messageMainView = messageMainView ;
     }
 
     protected void initLookAndFeel() {
@@ -39,6 +42,10 @@ public class MessageControleur implements MessageObserver{
     public void sendMessage(String text) {
         Message message = new Message(this.user, text) ;
         this.mDatabase.addMessage(message);
+    }
+
+    public void rechargeMessage( ) {
+        this.messageMainView.rechargeMessage(  this.mDatabase.getMessages());
     }
 
 /*
