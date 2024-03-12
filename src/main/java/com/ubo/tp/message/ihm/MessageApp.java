@@ -240,9 +240,11 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 			messageMainView = new MessageMainView(messageControleur, this.user, this.message);
 		messageMainView.addMessage(message);
 		List<JPanel> panels = new ArrayList<>();
-		panels.add(rechercheView.getContentPane());
-		panels.add(messageMainView.getContentPane());
-		mMainView.changeCotent(panels);
+		if(rechercheView != null) {
+			panels.add(rechercheView.getContentPane());
+			panels.add(messageMainView.getContentPane());
+			mMainView.changeCotent(panels);
+		}
 		//RechercheView rechercheView = new RechercheView(rechercheControlleur);
 		//rechercheView.initGUI();
 	}

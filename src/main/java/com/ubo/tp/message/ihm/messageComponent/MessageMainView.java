@@ -43,6 +43,9 @@ public class MessageMainView {
 
     public void addMessage(Message message) {
         MessageView messageView = new MessageView();
+        if (this.user != null)
+        {
+
         for(String tags : this.user.getFollows()){
                 if(tags.equals(message.getSender().getUserTag()) ){
                     messageView.initGUI(message.getSender().getName(), message.getText(), LocalTime.now().toString());
@@ -52,7 +55,7 @@ public class MessageMainView {
         if( this.user.getUserTag().equals(message.getSender().getUserTag())) {
             messageView.initGUI(message.getSender().getName(), message.getText(), LocalTime.now().toString());
             vBoxMessages.add(messageView.getContentPane());
-            ;
+        }
         }
     }
 
