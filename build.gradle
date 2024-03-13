@@ -1,0 +1,30 @@
+apply plugin: 'java'
+
+        // Version de Java utilisée pour la compilation
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+
+        // Définir le répertoire des sources
+        sourceSets {
+        main {
+        java {
+        srcDirs = ['src']
+        }
+        }
+        }
+
+        // Configuration du JAR
+        jar {
+        manifest {
+        attributes(
+        'Main-Class': 'main.java.com.ubo.tp.message.MessageAppLauncher'
+        )
+        }
+        from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+        }
+        archiveFileName = 'MonApplication.jar'
+        destinationDirectory = file('bin') // Le répertoire où le JAR sera généré
+        }
+
+        // Tâche pour nettoyer les artefacts de build
