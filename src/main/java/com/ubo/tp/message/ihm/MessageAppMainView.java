@@ -150,8 +150,10 @@ public class MessageAppMainView {
         hBox.add(vBoxProfil);
         hBox.add(vBox);
         hBox.add(vBoxAbonnes);
-
         mFrame.getContentPane().add(hBox);
+
+
+
         ImageIcon icon = new ImageIcon(MessageAppMainView.class.getClassLoader().getResource("logo_20.png"));
         mFrame.setIconImage(icon.getImage());
         mFrame.setLayout(new GridBagLayout());
@@ -379,8 +381,6 @@ public class MessageAppMainView {
 
 //    public File getFolder() {
 //    }
-
-
     protected void initGUIHome() {
         contentPaneHome = new JPanel(null) {
             @Override
@@ -422,7 +422,6 @@ public class MessageAppMainView {
         Button sendUserButton = new Button("Write User");
         sendUserButton.setPreferredSize(new Dimension(100, 50));
         sendUserButton.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 MessageAppMainView.this.writeUser();

@@ -1,0 +1,10 @@
+<project name="MonProjet" default="compile">
+    <target name="compile">
+        <mkdir dir="bin"/>
+        <javac srcdir="src" destdir="bin"/>
+    </target>
+
+    <target name="jar" depends="compile">
+        <jar destfile="MonApplication.jar" basedir="bin"/>
+    </target>
+</project>

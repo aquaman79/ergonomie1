@@ -336,8 +336,6 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 		//mMainView.refresh();
 
 	}
-
-
 	@Override
 	public void notifyMessageFiltred(Set<Message> message) {
 		messageMainView.viewMessageFiltre(message);
@@ -398,7 +396,4 @@ public class MessageApp implements IDatabaseObserver,ISessionObserver {
 	@Override
 	public void notifyLogout() {
 	}
-
-
-
 }
