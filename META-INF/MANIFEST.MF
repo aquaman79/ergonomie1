@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.10.14
+Created-By: 1.8.0_402-402-b06 (OpenLogic-OpenJDK)
+Main-Class: main.java.com.ubo.tp.message.MessageAppLauncher
+
