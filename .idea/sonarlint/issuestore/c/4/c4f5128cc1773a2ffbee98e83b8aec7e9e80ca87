@@ -1,0 +1,8 @@
+
+š	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Þè†øúÿÿÿÿJ$8b2e33d8-1ab2-43c6-a0a8-123e841951fe
+w	java:S1254"<This block of commented-out lines of code should be removed.(ÀÝìJ$59df3caf-2db0-4ebb-9717-aa0f38108a72
+s
+java:S1128
+"+Remove this unused import 'java.util.UUID'.(ÀãÄ£úÿÿÿÿ8¹ü®Àã1J$f28c82f4-2302-40f4-b2e1-327757ca2df1
+k
+java:S1068"/Remove this unused "messageView" private field.(þ™ð­J$c4485bd7-4589-4181-b443-b90cdf464c17

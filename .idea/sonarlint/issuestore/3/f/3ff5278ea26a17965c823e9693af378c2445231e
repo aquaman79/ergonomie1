@@ -1,0 +1,69 @@
+
+c
+java:S1604I"(Make this anonymous inner class a lambda(È¿ÔSJ$4cd81e2f-6ad6-4c57-81d1-05f0c9ad1a14
+i
+java:S1604S"(Make this anonymous inner class a lambda(Ü‹ØƒÿÿÿÿÿJ$43bf909e-1a36-46a0-9f89-1851f188ca97
+i
+java:S1604b"(Make this anonymous inner class a lambda(„¬íÚÿÿÿÿÿJ$3f7b06a9-2894-4559-b81a-59e376ac280f
+d
+java:S1604l"(Make this anonymous inner class a lambda(öâğ»J$aecf3157-0c82-4216-92d1-c9c2d1fe43c2
+j
+java:S1604¢"(Make this anonymous inner class a lambda(±ÆêÖşÿÿÿÿJ$22a792e2-6cfe-4912-a8f2-ddca3e398653
+j
+java:S1604®"(Make this anonymous inner class a lambda(èˆ—ºúÿÿÿÿJ$5d0666af-324a-4604-b10e-72594d45bdb0
+e
+java:S1604ì"(Make this anonymous inner class a lambda(‚ş–—J$856696f2-3060-4185-9607-851cf8d934a8
+j
+java:S1604Í"(Make this anonymous inner class a lambda(’ìêöûÿÿÿÿJ$6a3ba852-8ba0-4d8e-9938-16840be17892
+j
+java:S1604“"(Make this anonymous inner class a lambda(Ô¶µÿşÿÿÿÿJ$4c89ebc5-d184-4384-a6e9-95647f3cfeea
+d
+java:S1604"(Make this anonymous inner class a lambda(È¿ÔSJ$9240356f-3aff-42cf-a10a-8aa517902a81
+j
+java:S1604™"(Make this anonymous inner class a lambda(Ü‹ØƒÿÿÿÿÿJ$aaceedf3-a3d2-4617-bd4c-9aa16e01763a
+j
+java:S1604¨"(Make this anonymous inner class a lambda(„¬íÚÿÿÿÿÿJ$ab91dd50-6ef3-4631-aef7-a1f2c6f2fd43
+e
+java:S1604²"(Make this anonymous inner class a lambda(öâğ»J$4fff1bc1-f676-42ce-af4a-20754ec65c64
+¡
+java:S1488Ï"_Immediately return this expression instead of assigning it to the temporary variable "newUser".(ÂùùşÿÿÿÿJ$a9c00705-e3ca-42ad-af4e-709b0f9c2938
+¤
+java:S1488÷"bImmediately return this expression instead of assigning it to the temporary variable "newMessage".(àÀ¬±úÿÿÿÿJ$131eb8f4-b7ea-415c-a82b-3cb73ecd59d5
+«
+java:S4144×"bUpdate this method so that its implementation is not identical to "addUserInDatabase" on line 306.(•«‡¡şÿÿÿÿ8®Û®Àã1J$8b7176c7-86e0-403b-a4f8-4b7cd4f8b3d4
+Ÿ
+java:S14503"^Remove the "contentPaneHome" field and declare it as a local variable in the relevant methods.(˜½òØşÿÿÿÿJ$46442428-00ba-446b-8301-2ec10d065648
+y
+java:S1854^"=Remove this useless assignment to local variable "fileLabel".(„Å„J$cdd6805e-b195-4d3e-8004-8e70076c3468
+j
+java:S1481^".Remove this unused "fileLabel" local variable.(„Å„J$d9458391-a04a-4be9-b485-43be0db01d0a
+w	java:S125{"<This block of commented-out lines of code should be removed.(¡²§„J$a38a4488-4ba9-4cf1-89a3-894cfa9a73e4
+|
+java:S1854É"?Remove this useless assignment to local variable "aproposMenu".(¥õ ¶J$e471ce75-8d8d-4c86-95e0-22d406696e36
+g	java:S106¾"+Replace this use of System.out by a logger.(íÏÙ‚J$6d7611d4-e056-4b01-9fbb-9e036be9f518
+m
+java:S1481É"0Remove this unused "aproposMenu" local variable.(¥õ ¶J$59897da8-dbe1-4b8b-8f67-28f68f9fabc8
+}	java:S125ƒ"<This block of commented-out lines of code should be removed.(Ìê‡ÒüÿÿÿÿJ$773a3dec-8fcb-4a31-b26f-db8b7dc8721e
+}	java:S125´"<This block of commented-out lines of code should be removed.(ã‰¹œøÿÿÿÿJ$eb0183eb-6909-45a1-9cb0-6064e09e62ec
+}	java:S125¹"<This block of commented-out lines of code should be removed.(¤§áœÿÿÿÿÿJ$1854988c-6161-48be-8fae-0280a6a7ac6b
+`
+java:S2119Í"Save and re-use this "Random".(Æá¼ŞùÿÿÿÿJ$da7cab41-301a-4118-b7c8-dbaaf49c234d
+‚
+java:S1155í">Use isEmpty() to check whether the collection is empty or not.(Š–­¦8ØŞ®Àã1J$c1e43e06-cee2-44be-a5a1-9cd20a4b282c
+[
+java:S2119ó"Save and re-use this "Random".(•õµ“J$0d515719-44e5-4c9b-801a-44419e5b0827
+}	java:S125ü"<This block of commented-out lines of code should be removed.(Ş˜ûÿÿÿÿJ$ee87712f-b1e5-4b02-8aa1-09eaf14c23ee
+}	java:S125×"<This block of commented-out lines of code should be removed.(ØìŸúÿÿÿÿÿJ$c165348e-5e51-4994-bd42-9a6c76da62d6
+¦
+java:S1128"^Remove this unused import 'main.java.com.ubo.tp.message.ihm.loginComponent.SigninControlleur'.(˜×ò±ùÿÿÿÿ8Şß®Àã1J$497eeaf9-e702-48c6-9782-64236a65c0b0
+™
+java:S1128	"VRemove this unused import 'main.java.com.ubo.tp.message.ihm.loginComponent.SigninVue'.(ÖíÚñ8ßß®Àã1J$004f816e-7a87-4585-a849-68c7a69c2151
+¢
+java:S1128
+"_Remove this unused import 'main.java.com.ubo.tp.message.ihm.signupComponent.SignupControlleur'.(ÀŠ…ğ8àß®Àã1J$cd72d92e-c105-476d-9393-3c24e48a80a4
+›
+java:S1128"XRemove this unused import 'main.java.com.ubo.tp.message.ihm.signupComponent.SignupView'.(ûÁ¦Ğ8âß®Àã1J$e2f5ff60-42d4-4a3a-bd13-c0307b880c34
+s
+java:S1128"0Remove this unused import 'mock.MessageAppMock'.(¡¿Æ8âß®Àã1J$23a31ae1-aa32-4cd5-93a8-534d5255e743
+€
+java:S1128"8Remove this unused import 'java.util.stream.Collectors'.(Óóº´úÿÿÿÿ8ãß®Àã1J$0f9e7c39-9dd8-4e67-83a4-572c85353861

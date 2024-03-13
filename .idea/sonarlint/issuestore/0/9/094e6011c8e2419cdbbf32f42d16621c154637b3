@@ -1,0 +1,28 @@
+
+€
+java:S4973"<Strings and Boxed types should be compared using "equals()".(ÌÕŒ8Ÿõ®Àã1J$02bd8d14-5ff5-449c-aa60-7ba81ba1152f
+€
+java:S4973¸"<Strings and Boxed types should be compared using "equals()".(ÌÕŒ8¯õ®Àã1J$7a38e40f-5817-43b1-9b00-7cd997346639
+€
+java:S4973ì"<Strings and Boxed types should be compared using "equals()".(ÌÕŒ8¾õ®Àã1J$33fcd0cc-e17d-4127-a292-d05eeba65481
+Ã
+java:S1186º"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(¶‚«€ûÿÿÿÿJ$5affc210-34f6-4b17-aa1a-329d7e7160e5
+Ã
+java:S1186„"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(µ°ŸïıÿÿÿÿJ$dc0c64d3-233e-4261-adf9-49c9b034beba
+Ã
+java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(µ¿¾¹úÿÿÿÿJ$4d30f05f-40ec-4bb7-b33c-21b0832e6b4e
+|	java:S125"<This block of commented-out lines of code should be removed.(Œ²£ÂşÿÿÿÿJ$3ed68b8b-06cf-4bd0-90a7-e9857eab5f2c
+x	java:S125"<This block of commented-out lines of code should be removed.(œËâƒJ$77038f5a-fa51-4159-9b8a-706a314b0065
+x	java:S125"<This block of commented-out lines of code should be removed.(é¦ÎJ$9bfcaa22-332c-42b5-a5a2-3027f9a81203
+}	java:S125«"<This block of commented-out lines of code should be removed.(´ó¹ñùÿÿÿÿJ$723827f4-a5e4-4ed7-85ec-2457354fbb84
+w	java:S125Ú"<This block of commented-out lines of code should be removed.(˜®øJJ$c6f9ccb5-f9fb-4a9f-b93c-60bd01efe40b
+}	java:S125Ü"<This block of commented-out lines of code should be removed.(Èı€ÓúÿÿÿÿJ$ca96d754-9115-415f-984e-19c4d9b54ed0
+}	java:S125Ş"<This block of commented-out lines of code should be removed.(‡ÊñÎüÿÿÿÿJ$800e6633-ad79-4c25-a2e6-db38022a4189
+w	java:S125æ"<This block of commented-out lines of code should be removed.(˜®øJJ$aae3ae46-5fc2-45b5-a59f-c9a117cebda8
+l	java:S106€"+Replace this use of System.out by a logger.(¼¯Î¿şÿÿÿÿJ$3175582c-c802-4f21-a1b5-58a6d271c15b
+}	java:S125"<This block of commented-out lines of code should be removed.(É¤ÉûÿÿÿÿJ$99791934-196e-449c-89f6-da1cd5afe883
+l	java:S106•"+Replace this use of System.out by a logger.(üÈÖ¢ÿÿÿÿÿJ$676f577f-180d-4f05-bc5b-f5e44bc10c74
+l	java:S106¬"+Replace this use of System.out by a logger.(‹Ç©ãúÿÿÿÿJ$dc1d6899-e68a-4713-9de8-711a3812f601
+}	java:S125µ"<This block of commented-out lines of code should be removed.(ıºÒéúÿÿÿÿJ$1dcbba41-92c3-4ec1-b6ba-ddfd323d6302
+}	java:S125Ğ"<This block of commented-out lines of code should be removed.(µ°ƒøÿÿÿÿJ$b7809ce7-5002-4f17-a3f9-2343f92ca37c
+}	java:S125é"<This block of commented-out lines of code should be removed.(ıºÒéúÿÿÿÿJ$eb4528a9-5ae7-49b1-877e-dd47766c7556
